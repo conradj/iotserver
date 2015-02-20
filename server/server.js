@@ -28,7 +28,7 @@ if (require.main === module) {
 
 }
 
-app.listen(process.env.PORT);
+//app.listen(process.env.PORT);
 
 /*app.use('/room', function(req, res, next ) { 
     console.log("doestnsi work");
