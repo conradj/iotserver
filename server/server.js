@@ -23,10 +23,12 @@ if (require.main === module) {
   app.io = socketIO(server);
     
     app.io.on('connection', function(socket){
-  console.log('a user connected');
-});
+      console.log('a user connected');
+    });
 
 }
+
+app.listen(process.env.PORT);
 
 /*app.use('/room', function(req, res, next ) { 
     console.log("doestnsi work");
