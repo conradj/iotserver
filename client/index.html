@@ -1,0 +1,36 @@
+<head>
+    <script src="/socket.io/socket.io.js"></script>
+<script>
+  
+</script>
+
+</head>
+<body>
+    event lst
+<ul id="eventList"></ul>
+    
+    <script>
+    /*var evtSource = new EventSource("/api/rooms");
+    
+    evtSource.onmessage = function(e) {
+      var newElement = document.createElement("li");
+      
+      newElement.innerHTML = "message: " + e.data;
+      eventList.appendChild(newElement);
+    }*/
+    
+    var testElement = document.createElement("li");
+      
+    testElement.innerHTML = "test "
+    document.getElementById("eventList").appendChild(testElement);
+    
+    var socket = io();
+    socket.on('roommsg', function(msg){
+        console.log(msg);
+        var newElement = document.createElement("li");
+      
+        newElement.innerHTML = "message: " + msg;
+        document.getElementById("eventList").appendChild(newElement);
+      });
+</script>
+    </body>
