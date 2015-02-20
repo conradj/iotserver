@@ -1,6 +1,7 @@
 {
   "restApiRoot": "/api",
-  "host": "0.0.0.0",
+  //"host": "0.0.0.0",
+  "host": "cjhome.azurewebsites.net",
   "port": 3000,
   "remoting": {
     "context": {
