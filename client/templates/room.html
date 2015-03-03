@@ -1,0 +1,79 @@
+<script>
+    // Define and register <say-hi>.
+    var proto2 = Object.create(HTMLElement.prototype);
+
+    proto2.createdCallback = function () {
+        this.innerHTML = 'Hello, <b>' +
+            (this.getAttribute('name') || '?') + '</b>';
+    };
+
+    document.registerElement('say-hi', {
+        prototype: proto2
+    });
+</script>
+
+<template id="room-template">
+    <style>
+        h1 {
+            background-color: red;
+        }
+    </style>
+    <h1 id="room-name"></h1>
+    <p style="clear:both">Volume: <span id="room-volume"></span>
+    </p>
+    <p>Mute: <span id="room-mute"></span>
+    </p>
+</template>
+
+<script>
+    (function () {
+        var importDoc = document.currentScript.ownerDocument; // importee
+
+        // Define and register <iot-room> template
+        // that uses Shadow DOM and attributes.
+        var proto = Object.create(HTMLElement.prototype);
+
+
+        proto.createdCallback = function () {
+            this.readAttributes();
+            // get template in import
+            var template = importDoc.querySelector('#room-template');
+
+            // import template into
+            var clone = document.importNode(template.content, true);
+            var root = this.createShadowRoot();
+
+            this.nameElement = clone.querySelector('#room-name');
+            this.volumeElement = clone.querySelector('#room-volume');
+            this.muteElement = clone.querySelector('#room-mute');
+            this.updateRoom();
+            root.appendChild(clone);
+
+        };
+
+        proto.attributeChangedCallback = function (attrName, oldVal, newVal) {
+            if (/^(name|volume|mute)$/.test(attrName)) {
+                console.log("attr changed" + attrName + oldVal + newVal);
+                this.readAttributes();
+                this.updateRoom();
+            }
+        };
+        proto.readAttributes = function () {
+            this.roomName = this.getAttribute("name");
+            this.roomVolume = this.getAttribute("volume");
+            this.roomMute = this.getAttribute("mute");
+            console.log(this.roomName);
+        };
+
+        proto.updateRoom = function () {
+            this.nameElement.innerHTML = this.roomName;
+            this.volumeElement.innerHTML = this.roomVolume;
+            this.muteElement.innerHTML = this.roomMute;
+            console.log("update" + this.roomName);
+        }
+
+        document.registerElement('iot-room', {
+            prototype: proto
+        });
+    })();
+</script>
