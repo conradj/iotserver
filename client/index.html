@@ -1,20 +1,17 @@
 <head>
+    
     <script src="/socket.io/socket.io.js"></script>
+    <script src="jspm_packages/system.js"></script>
+    <script src="config.js"></script>
+    <script>
+      System.import('lib/main');
+    </script>
+    <link rel="import" href="/templates/room.html">
 <script>
-  
+    
 </script>
 
 </head>
 <body>
-    
-    Living Room Volume:
-    <input id="volume" type="range" value="0"/>
-    <script>
-    var socket = io();
-    socket.on('roommsg', function(msg){
-        console.log(msg);
-        
-        document.getElementById("volume").value = msg.volume;
-      });
-</script>
-    </body>
+    <div id='rooms-container'></div>
+</body>

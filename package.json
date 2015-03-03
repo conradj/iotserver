@@ -29,5 +29,23 @@
     "type": "",
     "url": ""
   },
-  "description": "iotserver"
+  "description": "iotserver",
+  "jspm": {
+    "directories": {
+      "lib": "../lib",
+      "packages": "client/jspm_packages"
+    },
+    "configFile": "client/config.js",
+    "dependencies": {
+      "compression": "^1.0.3",
+      "errorhandler": "^1.1.1",
+      "loopback": "^2.8.0",
+      "loopback-boot": "^2.4.0",
+      "loopback-connector-mongodb": "^1.7.0",
+      "loopback-datasource-juggler": "^2.7.0",
+      "serve-favicon": "^2.0.1",
+      "server-sent-events": "0.0.4",
+      "socket.io": "^1.3.4"
+    }
+  }
 }
