@@ -27,53 +27,53 @@
 
 <script>
     (function () {
-        var importDoc = document.currentScript.ownerDocument; // importee
+        var importDoc = document.currentScript.ownerDocument // importee
 
         // Define and register <iot-room> template
         // that uses Shadow DOM and attributes.
-        var proto = Object.create(HTMLElement.prototype);
+        var proto = Object.create(HTMLElement.prototype)
 
 
         proto.createdCallback = function () {
-            this.readAttributes();
+            this.readAttributes()
             // get template in import
-            var template = importDoc.querySelector('#room-template');
+            var template = importDoc.querySelector('#room-template')
 
             // import template into
-            var clone = document.importNode(template.content, true);
-            var root = this.createShadowRoot();
+            var clone = document.importNode(template.content, true)
+            var root = this.createShadowRoot()
 
-            this.nameElement = clone.querySelector('#room-name');
-            this.volumeElement = clone.querySelector('#room-volume');
-            this.muteElement = clone.querySelector('#room-mute');
-            this.updateRoom();
-            root.appendChild(clone);
+            this.nameElement = clone.querySelector('#room-name')
+            
+        
+            this.volumeElement = clone.querySelector('#room-volume')
+            this.muteElement = clone.querySelector('#room-mute')
+            this.updateRoom()
+            root.appendChild(clone)
 
-        };
+        }
 
         proto.attributeChangedCallback = function (attrName, oldVal, newVal) {
             if (/^(name|volume|mute)$/.test(attrName)) {
-                console.log("attr changed" + attrName + oldVal + newVal);
-                this.readAttributes();
-                this.updateRoom();
+                //console.log("attr changed" + attrName + oldVal + newVal)
+                this.readAttributes()
+                this.updateRoom()
             }
-        };
+        }
         proto.readAttributes = function () {
-            this.roomName = this.getAttribute("name");
-            this.roomVolume = this.getAttribute("volume");
-            this.roomMute = this.getAttribute("mute");
-            console.log(this.roomName);
-        };
+            this.roomName = this.getAttribute("name")
+            this.roomVolume = this.getAttribute("volume")
+            this.roomMute = this.getAttribute("mute")
+        }
 
         proto.updateRoom = function () {
-            this.nameElement.innerHTML = this.roomName;
-            this.volumeElement.innerHTML = this.roomVolume;
-            this.muteElement.innerHTML = this.roomMute;
-            console.log("update" + this.roomName);
+            this.nameElement.innerHTML = this.roomName
+            this.volumeElement.innerHTML = this.roomVolume
+            this.muteElement.innerHTML = this.roomMute
         }
 
         document.registerElement('iot-room', {
             prototype: proto
-        });
-    })();
+        })
+    })()
 </script>
