@@ -4,7 +4,7 @@ import Sockets from './sockets'
 
 export function bootstrap() {
     // bootstrap code here
-    Ajax.getJSON('http://192.168.1.61:3000/api/rooms')
+    Ajax.getJSON('http://shiny-shiny-shiny.heruku.com/api/rooms')
         .then(DisplayRooms)
         .then(Sockets.start())
 }
