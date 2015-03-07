@@ -32,10 +32,10 @@
   "description": "iotserver",
   "jspm": {
     "directories": {
-      "lib": "../lib",
+      "baseURL": "client",
+      "lib": "client/",
       "packages": "client/jspm_packages"
     },
-    "configFile": "client/config.js",
     "dependencies": {
       "compression": "^1.0.3",
       "errorhandler": "^1.1.1",

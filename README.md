@@ -9,3 +9,17 @@ AAAAnd we're using [http://jspm.io/](JSPM) for front end package management, ES6
 1. `npm install for server dependencies`
 2. `jspm install for client dependencies`
 3. `slc run`
+
+
+PRODUCTION (or... "Production")
+
+`jspm bundle-sfx lib/main app.js`
+Include in index.html
+Also need Traceur runtime if you are using ES6 features (hopefully not for long https://github.com/systemjs/builder/issues/46)
+
+
+For heroku...
+
+http://docs.strongloop.com/display/SL/Heroku
+
+`heroku apps:create --buildpack https://github.com/strongloop/strongloop-buildpacks.git
