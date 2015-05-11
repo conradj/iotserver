@@ -34,3 +34,6 @@ dist
 
 # generated files
 .DS_Store
+
+# typescript intellisense files for VSCode
+typings
