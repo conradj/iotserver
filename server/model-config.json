@@ -25,13 +25,5 @@
   "Role": {
     "dataSource": "db",
     "public": false
-  },
-  "room": {
-    "dataSource": "db",
-    "public": true
-  },
-  "track": {
-    "dataSource": "db",
-    "public": true
   }
 }
