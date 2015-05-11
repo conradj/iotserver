@@ -1,3 +1,4 @@
+/// <reference path="../typings/node/node.d.ts"/>
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 //var sse = require('server-sent-events');

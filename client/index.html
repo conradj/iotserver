@@ -1,17 +1,19 @@
 <head>
-    
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="jspm_packages/system.js"></script>
-    <script src="config.js"></script>
-    <script>
-      System.import('lib/main');
-    </script>
     <link rel="import" href="/templates/room.html">
-<script>
-    
-</script>
-
 </head>
 <body>
     <div id='rooms-container'></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- build:js -->
+    <script src="../jspm_packages/system.js"></script>
+    <script src="config.js"></script>
+    <script>
+        System.import('lib/main');
+    </script>
+    <!--
+    Gulp deploy task will replace above with below refs to:
+    <script src="bin/traceur-runtime.js"></script>
+    <script src="app.js"></script>
+    -->
+    <!-- endbuild -->
 </body>
