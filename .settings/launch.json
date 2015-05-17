@@ -10,6 +10,7 @@
 			"type": "node",
 			// Workspace relative or absolute path to the program.
 			"program": "server/server.js",
+			//"program": "server/bin/discover-schema.js",
 			// Automatically stop program after launch.
 			"stopOnEntry": true,
 			// Command line arguments passed to the program.

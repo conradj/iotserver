@@ -25,5 +25,41 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "Albums": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Artists": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Events": {
+    "dataSource": "db",
+    "public": true
+  },
+  "EventTypes": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Genres": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Locations": {
+    "dataSource": "db",
+    "public": true
+  },
+  "SoundChangeEvents": {
+    "dataSource": "db",
+    "public": true
+  },
+  "TrackEvents": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Tracks": {
+    "dataSource": "db",
+    "public": true
   }
 }
