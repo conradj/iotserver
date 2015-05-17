@@ -61,5 +61,9 @@
   "Tracks": {
     "dataSource": "db",
     "public": true
+  },
+  "SonosEvents": {
+    "dataSource": null,
+    "public": true
   }
 }

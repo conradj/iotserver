@@ -10,11 +10,11 @@
   "properties": {
     "ID": {
       "type": "Number",
+      "id": 1,
       "required": false,
       "length": null,
       "precision": 32,
       "scale": 0,
-      "id": 1,
       "postgresql": {
         "columnName": "ID",
         "dataType": "integer",
@@ -114,5 +114,9 @@
         "nullable": "YES"
       }
     }
-  }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
 }
