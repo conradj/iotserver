@@ -18,8 +18,9 @@ ds.discoverModelDefinitions(function (err, models) {
               delete schema.properties[prop];
             }
           }
+          
           if(schema.properties.ID) {
-            schema.properties.ID.required = false;
+            schema.properties.ID.required = false; // if using autoincrement in your database, allow ID fields to be empty on POST/PUT
           }
           if(schema.name) { // make the model name have the same casing as table names
             schema.name = def.name;
