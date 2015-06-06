@@ -1,14 +1,14 @@
 {
-  "name": "Events",
+  "name": "Album",
   "options": {
     "idInjection": false,
     "postgresql": {
       "schema": "public",
-      "table": "Events"
+      "table": "Album"
     }
   },
   "properties": {
-    "ID": {
+    "id": {
       "type": "Number",
       "id": 1,
       "required": false,
@@ -16,7 +16,7 @@
       "precision": 32,
       "scale": 0,
       "postgresql": {
-        "columnName": "ID",
+        "columnName": "id",
         "dataType": "integer",
         "dataLength": null,
         "dataPrecision": 32,
@@ -24,14 +24,14 @@
         "nullable": "NO"
       }
     },
-    "LocationID": {
+    "ArtistID": {
       "type": "Number",
       "required": false,
       "length": null,
       "precision": 32,
       "scale": 0,
       "postgresql": {
-        "columnName": "LocationID",
+        "columnName": "ArtistID",
         "dataType": "integer",
         "dataLength": null,
         "dataPrecision": 32,
@@ -39,48 +39,63 @@
         "nullable": "YES"
       }
     },
-    "DateTime": {
+    "GenreID": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "GenreID",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      }
+    },
+    "Title": {
       "type": "String",
       "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "DateTime",
-        "dataType": "timestamp without time zone",
+        "columnName": "Title",
+        "dataType": "text",
         "dataLength": null,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "YES"
       }
     },
-    "EventTypeID": {
-      "type": "Number",
-      "required": true,
+    "Year": {
+      "type": "String",
+      "required": false,
       "length": null,
-      "precision": 32,
-      "scale": 0,
+      "precision": null,
+      "scale": null,
       "postgresql": {
-        "columnName": "EventTypeID",
-        "dataType": "integer",
+        "columnName": "Year",
+        "dataType": "text",
         "dataLength": null,
-        "dataPrecision": 32,
-        "dataScale": 0,
-        "nullable": "NO"
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
       }
     }
   },
   "validations": [],
   "relations": {
-    "SoundChangeEvent": {
-      "type": "hasOne",
-      "model": "SoundChangeEvents",
-      "foreignKey": "ID"
+    "artist": {
+      "type": "belongsTo",
+      "model": "Artist",
+      "foreignKey": "ArtistID"
     },
-    "TrackEvent": {
-      "type": "hasOne",
-      "model": "TrackEvents",
-      "foreignKey": "ID"
+    "genre": {
+      "type": "belongsTo",
+      "model": "Genre",
+      "foreignKey": "GenreID"
     }
   },
   "acls": [],

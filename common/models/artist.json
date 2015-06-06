@@ -1,14 +1,14 @@
 {
-  "name": "Locations",
+  "name": "Artist",
   "options": {
     "idInjection": false,
     "postgresql": {
       "schema": "public",
-      "table": "Locations"
+      "table": "Artist"
     }
   },
   "properties": {
-    "ID": {
+    "id": {
       "type": "Number",
       "id": 1,
       "required": false,
@@ -16,7 +16,7 @@
       "precision": 32,
       "scale": 0,
       "postgresql": {
-        "columnName": "ID",
+        "columnName": "id",
         "dataType": "integer",
         "dataLength": null,
         "dataPrecision": 32,
@@ -27,9 +27,6 @@
     "Name": {
       "type": "String",
       "required": false,
-      "index": {
-        "unique": true
-      },
       "length": null,
       "precision": null,
       "scale": null,
@@ -44,7 +41,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "albums": {
+      "type": "hasMany",
+      "model": "Album",
+      "foreignKey": "ArtistID"
+    }
+  },
   "acls": [],
   "methods": []
 }

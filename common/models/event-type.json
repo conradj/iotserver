@@ -1,14 +1,14 @@
 {
-  "name": "Genres",
+  "name": "EventType",
   "options": {
     "idInjection": false,
     "postgresql": {
       "schema": "public",
-      "table": "Genres"
+      "table": "EventType"
     }
   },
   "properties": {
-    "ID": {
+    "id": {
       "type": "Number",
       "id": 1,
       "required": false,
@@ -16,7 +16,7 @@
       "precision": 32,
       "scale": 0,
       "postgresql": {
-        "columnName": "ID",
+        "columnName": "id",
         "dataType": "integer",
         "dataLength": null,
         "dataPrecision": 32,

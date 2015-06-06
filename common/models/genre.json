@@ -1,14 +1,14 @@
 {
-  "name": "EventTypes",
+  "name": "Genre",
   "options": {
     "idInjection": false,
     "postgresql": {
       "schema": "public",
-      "table": "EventTypes"
+      "table": "Genre"
     }
   },
   "properties": {
-    "ID": {
+    "id": {
       "type": "Number",
       "id": 1,
       "required": false,
@@ -16,7 +16,7 @@
       "precision": 32,
       "scale": 0,
       "postgresql": {
-        "columnName": "ID",
+        "columnName": "id",
         "dataType": "integer",
         "dataLength": null,
         "dataPrecision": 32,
@@ -41,7 +41,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "artists": {
+      "type": "hasMany",
+      "model": "Artist",
+      "foreignKey": "id"
+    },
+    "albums": {
+      "type": "hasMany",
+      "model": "Album",
+      "foreignKey": "id"
+    }
+  },
   "acls": [],
   "methods": []
 }

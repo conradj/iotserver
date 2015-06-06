@@ -1,7 +1,7 @@
 module.exports = function(Location) {
     console.log("location");
     
-    Location.validatesUniquenessOf('Name');
+    Location.validatesUniquenessOf('name');
     
 //    Location.observe('access', function logQuery(ctx, next) {
 //      console.log('Accessing %s matching %s', ctx.Model.modelName, ctx.query.where);
@@ -28,8 +28,8 @@ module.exports = function(Location) {
 //      next();
 //    });
     
-    Location.upsertOnName = function(name, cb) {
-        Location.findOrCreate({where: {"Name": name }}, {"ID": 0,"Name": name }, function(err, instance) {
+    Location.findOrCreateOnName = function(name, cb) {
+        Location.findOrCreate({where: {"Name": name }}, {"Name": name }, function(err, instance) {
             if (err){
               console.log("upsertOnName error:", err);
               cb(null, err);
@@ -40,9 +40,9 @@ module.exports = function(Location) {
     };
      
     Location.remoteMethod(
-        'upsertOnName', 
+        'findOrCreateOnName', 
         {
-          accepts: {arg: 'Nametest', type: 'string'},
+          accepts: {arg: 'Name', type: 'string'},
           returns: {arg: 'Location', type: 'object'}
         }
     );

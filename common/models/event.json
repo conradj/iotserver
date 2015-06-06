@@ -1,22 +1,22 @@
 {
-  "name": "TrackEvents",
+  "name": "Event",
   "options": {
     "idInjection": false,
     "postgresql": {
       "schema": "public",
-      "table": "TrackEvents"
+      "table": "Event"
     }
   },
   "properties": {
-    "ID": {
+    "id": {
       "type": "Number",
       "id": 1,
-      "required": true,
+      "required": false,
       "length": null,
       "precision": 32,
       "scale": 0,
       "postgresql": {
-        "columnName": "ID",
+        "columnName": "id",
         "dataType": "integer",
         "dataLength": null,
         "dataPrecision": 32,
@@ -24,14 +24,14 @@
         "nullable": "NO"
       }
     },
-    "TrackID": {
+    "LocationID": {
       "type": "Number",
       "required": false,
       "length": null,
       "precision": 32,
       "scale": 0,
       "postgresql": {
-        "columnName": "TrackID",
+        "columnName": "LocationID",
         "dataType": "integer",
         "dataLength": null,
         "dataPrecision": 32,
@@ -39,43 +39,53 @@
         "nullable": "YES"
       }
     },
-    "Control": {
+    "CreateDate": {
       "type": "String",
       "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "Control",
-        "dataType": "text",
+        "columnName": "CreateDate",
+        "dataType": "timestamp without time zone",
         "dataLength": null,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "YES"
       }
     },
-    "Source": {
-      "type": "String",
-      "required": false,
+    "EventTypeID": {
+      "type": "Number",
+      "required": true,
       "length": null,
-      "precision": null,
-      "scale": null,
+      "precision": 32,
+      "scale": 0,
       "postgresql": {
-        "columnName": "Source",
-        "dataType": "text",
+        "columnName": "EventTypeID",
+        "dataType": "integer",
         "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "YES"
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "NO"
       }
     }
   },
   "validations": [],
   "relations": {
-    "events": {
+    "Location": {
       "type": "belongsTo",
-      "model": "Events",
-      "foreignKey": "ID"
+      "model": "Location",
+      "foreignKey": "LocationID"
+    },
+    "SoundChangeEvent": {
+      "type": "hasOne",
+      "model": "SoundChangeEvent",
+      "foreignKey": "id"
+    },
+    "TrackEvent": {
+      "type": "hasOne",
+      "model": "TrackEvent",
+      "foreignKey": "id"
     }
   },
   "acls": [],

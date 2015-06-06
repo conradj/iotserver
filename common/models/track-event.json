@@ -1,22 +1,22 @@
 {
-  "name": "Tracks",
+  "name": "TrackEvent",
   "options": {
     "idInjection": false,
     "postgresql": {
       "schema": "public",
-      "table": "Tracks"
+      "table": "TrackEvent"
     }
   },
   "properties": {
-    "ID": {
+    "id": {
       "type": "Number",
       "id": 1,
-      "required": false,
+      "required": true,
       "length": null,
       "precision": 32,
       "scale": 0,
       "postgresql": {
-        "columnName": "ID",
+        "columnName": "id",
         "dataType": "integer",
         "dataLength": null,
         "dataPrecision": 32,
@@ -24,14 +24,14 @@
         "nullable": "NO"
       }
     },
-    "AlbumID": {
+    "TrackID": {
       "type": "Number",
       "required": false,
       "length": null,
       "precision": 32,
       "scale": 0,
       "postgresql": {
-        "columnName": "AlbumID",
+        "columnName": "TrackID",
         "dataType": "integer",
         "dataLength": null,
         "dataPrecision": 32,
@@ -39,44 +39,14 @@
         "nullable": "YES"
       }
     },
-    "ArtistID": {
-      "type": "Number",
-      "required": false,
-      "length": null,
-      "precision": 32,
-      "scale": 0,
-      "postgresql": {
-        "columnName": "ArtistID",
-        "dataType": "integer",
-        "dataLength": null,
-        "dataPrecision": 32,
-        "dataScale": 0,
-        "nullable": "YES"
-      }
-    },
-    "GenreID": {
-      "type": "Number",
-      "required": false,
-      "length": null,
-      "precision": 32,
-      "scale": 0,
-      "postgresql": {
-        "columnName": "GenreID",
-        "dataType": "integer",
-        "dataLength": null,
-        "dataPrecision": 32,
-        "dataScale": 0,
-        "nullable": "YES"
-      }
-    },
-    "Title": {
+    "Control": {
       "type": "String",
       "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "Title",
+        "columnName": "Control",
         "dataType": "text",
         "dataLength": null,
         "dataPrecision": null,
@@ -84,29 +54,14 @@
         "nullable": "YES"
       }
     },
-    "BPM": {
+    "Source": {
       "type": "String",
       "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "BPM",
-        "dataType": "text",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "YES"
-      }
-    },
-    "Mood": {
-      "type": "String",
-      "required": false,
-      "length": null,
-      "precision": null,
-      "scale": null,
-      "postgresql": {
-        "columnName": "Mood",
+        "columnName": "Source",
         "dataType": "text",
         "dataLength": null,
         "dataPrecision": null,
@@ -116,7 +71,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "events": {
+      "type": "belongsTo",
+      "model": "Event",
+      "foreignKey": "id"
+    }
+  },
   "acls": [],
   "methods": []
 }

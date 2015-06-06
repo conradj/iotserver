@@ -26,44 +26,44 @@
     "dataSource": "db",
     "public": false
   },
-  "Albums": {
+  "Album": {
     "dataSource": "db",
     "public": true
   },
-  "Artists": {
+  "Artist": {
     "dataSource": "db",
     "public": true
   },
-  "Events": {
+  "Event": {
     "dataSource": "db",
     "public": true
   },
-  "EventTypes": {
+  "EventType": {
     "dataSource": "db",
     "public": true
   },
-  "Genres": {
+  "Genre": {
     "dataSource": "db",
     "public": true
   },
-  "Locations": {
+  "LastPlayedTrack": {
     "dataSource": "db",
     "public": true
   },
-  "SoundChangeEvents": {
+  "Location": {
     "dataSource": "db",
     "public": true
   },
-  "TrackEvents": {
+  "SoundChangeEvent": {
     "dataSource": "db",
     "public": true
   },
-  "Tracks": {
+  "TrackEvent": {
     "dataSource": "db",
     "public": true
   },
-  "SonosEvents": {
-    "dataSource": null,
+  "Track": {
+    "dataSource": "db",
     "public": true
   }
 }
