@@ -19,7 +19,7 @@ export function bootstrap() {
     */
     
     //Ajax.getJSON('/api/rooms')
-    Ajax.getJSON('/api/rooms')
+    Ajax.getJSON('/api/locations')
         .then(DisplayRooms)
         .then(Sockets.start())
 }

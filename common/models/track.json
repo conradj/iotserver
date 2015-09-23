@@ -96,6 +96,16 @@
       "type": "belongsTo",
       "model": "Album",
       "foreignKey": "AlbumID"
+    },
+    "audio": {
+      "type": "hasOne",
+      "model": "TrackAudio",
+      "foreignKey": "id"
+    },
+    "trackEvent": {
+      "type": "hasOne",
+      "model": "TrackEvent",
+      "foreignKey": "TrackID"
     }
   },
   "acls": [],

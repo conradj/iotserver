@@ -1,6 +1,4 @@
 module.exports = function(Location) {
-    console.log("location");
-    
     Location.validatesUniquenessOf('name');
     
 //    Location.observe('access', function logQuery(ctx, next) {
@@ -31,10 +29,8 @@ module.exports = function(Location) {
     Location.findOrCreateOnName = function(name, cb) {
         Location.findOrCreate({where: {"Name": name }}, {"Name": name }, function(err, instance) {
             if (err){
-              console.log("upsertOnName error:", err);
               cb(null, err);
             }
-            console.log("upsertOnName:", instance);
             cb(null, instance);  
         });
     };

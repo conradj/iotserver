@@ -1,17 +1,16 @@
 {
-  "name": "SoundChangeEvent",
+  "name": "LastPlayedTrack",
   "options": {
     "idInjection": false,
     "postgresql": {
       "schema": "public",
-      "table": "SoundChangeEvent"
+      "table": "LastPlayedTrack"
     }
   },
   "properties": {
     "id": {
       "type": "Number",
-      "id": 1,
-      "required": true,
+      "required": false,
       "length": null,
       "precision": 32,
       "scale": 0,
@@ -21,37 +20,37 @@
         "dataLength": null,
         "dataPrecision": 32,
         "dataScale": 0,
-        "nullable": "NO"
+        "nullable": "YES"
       }
     },
-    "volume": {
+    "LocationID": {
       "type": "Number",
-      "required": true,
+      "required": false,
       "length": null,
       "precision": 32,
       "scale": 0,
       "postgresql": {
-        "columnName": "volume",
+        "columnName": "LocationID",
         "dataType": "integer",
         "dataLength": null,
         "dataPrecision": 32,
         "dataScale": 0,
-        "nullable": "NO"
+        "nullable": "YES"
       }
     },
-    "mute": {
-      "type": "Boolean",
-      "required": true,
+    "CreateDate": {
+      "type": "String",
+      "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "mute",
-        "dataType": "boolean",
+        "columnName": "CreateDate",
+        "dataType": "timestamp without time zone",
         "dataLength": null,
         "dataPrecision": null,
         "dataScale": null,
-        "nullable": "NO"
+        "nullable": "YES"
       }
     }
   },

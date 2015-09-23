@@ -1,15 +1,34 @@
 //var app = require('../../server/server');
-
+var Promise = require("bluebird");
 module.exports = function(Event) {
-    console.log("event");
-    console.log(Event);
-	
-    Event.observe('after save', function (ctx, next) {
-      console.log("after save?");
-        console.log(ctx.instance);
-        Event.app.io.emit('roommsg', ctx.instance);
-      next();
+    
+    // once a model is attached to the data source
+    Event.on('dataSourceAttached', function( obj ){
+        // wrap the whole model in Promise
+        // but we need to avoid 'validate' method 
+        Event = Promise.promisifyAll( Event, 
+            {filter: function(name, func, target){
+                return !( name == 'validate');
+            }} 
+        );
     });
+	
+    // Event.observe('after save', function (ctx, next) {
+    //   console.log("after save?");
+    //     console.log(ctx.instance);
+    //     Event.app.io.emit('roommsg', ctx.instance);
+    //   next();
+    // });
+    // 
+    // Event.emit = function(event) {
+    //     console.log("EVENTEMIT:", event, arguments);
+    //     //Event.app.io.emit('eventmsg', event);
+    // }
+    // 
+    // Event.prototype.broadcast = function(event) {
+    //     console.log("EVENTbroadcast:", this);
+    //     Event.app.io.emit('eventmsg', {test: "Hello World"});
+    // }
     
     Event.scrobble = function(locationId, 
         albumName,
@@ -18,55 +37,44 @@ module.exports = function(Event) {
         playlist,
         trackuri,
         cb) {
-        
-        //check if album, artist, track already exists
-        Event.app.models.Artist.findOrCreateOnName(artistName, function(err, artist) {
-            if(err) throw err;
             
-            Event.app.models.Album.findOrCreateOnTitleAndArtist(albumName, artist.id, function(err, album) {
-                if(err) throw err;
-                
-                console.log("artist:", artist);
-                console.log("album:", album);
-                Event.app.models.Track.findOrCreateOnArtistAlbumAndTitle(artist.id, album.id, trackName, function(err, track) {
-                    if(err) throw err;
-                    console.log("track:", track);
-                    console.log("locationId:", locationId);
-                    Event.create({ LocationID: locationId, EventTypeID: 1 }, function(err, event) {
-                        if(err) throw err;
-                        Event.app.models.TrackEvent.create({ id: event.id, TrackID: track.id });
-                    });
-                    
-                });
-            });
-        });
-        
-        cb(null, {"success":"scrobbled track event"}); 
-        
-//        if (albumId && artistId) {
-//            // see if the track already exists
-//            trackId = app.Track.get(trackName, albumId, artistId);
-//        }
-//        
-//       if (!albumId || !artistId || !trackId) {
-//           
-//       }
-//       
-//       if (!albumId) {
-//           albumId = app.Album.post(album);
-//       }
-//       
-//       if (!artistId) {
-//           artistId = app.Artist.post(artist);
-//       }
-//       
-//       if (!trackId) {
-//           trackId = app.Track.post(albumId, artistId, track);
-//       }
-//        
-//       eventId = event.post(locationId, 1);
-//       trackEventId = app.trackEvent.post(eventId, trackId);
-    };
+            var vm = { locationId: locationId };
+            // make sure artist, track, album exist, otherwise create them
+            Event.app.models.Artist.findOrCreateOnNameAsync(artistName)
+            .then(function(artist){
+                vm.artist = artist;
+                return Event.app.models.Album.findOrCreateOnTitleAndArtistAsync(albumName, vm.artist.id);
+            })
+            .then(function(album) {
+                Event.app.io.emit('toastmsg', "album saved");
+                vm.album = album;
+                vm.album["artist"] = vm.artist;
+                return Event.app.models.Track.findOrCreateOnArtistAlbumAndTitleAsync(
+                    vm.artist.id, vm.album.id, trackName);
+            })
+            .then(function(track) {
+                Event.app.io.emit('toastmsg', "track saved");
+                vm.track = track;
+                return Event.createAsync({ LocationID: locationId, EventTypeID: 1 });
+            })
+            .then(function(event) {
+                Event.app.io.emit('toastmsg', "event saved");
+                vm.event = event;
+                return Event.app.models.TrackEvent.createAsync({ id: vm.event.id, TrackID: vm.track.id });
+            })
+            .then(function(trackEvent) {
+                Event.app.io.emit('toastmsg', "track event saved");
+                vm.trackEvent = trackEvent;
+                return Event.app.models.TrackAudio.findOrCreateSearch(vm.artist.Name, vm.track.id, vm.track.Title);
+            })
+            .then(function(trackAudio) {
+                Event.app.io.emit('toastmsg', "track audio done");
+                vm.trackAudio = trackAudio;
+                Event.app.io.emit('eventmsg', vm); 
+                cb(null, vm);
+            })
+            .catch(console.error);
+    }
      
     Event.remoteMethod(
         'scrobble', 
@@ -79,7 +87,7 @@ module.exports = function(Event) {
               {arg: 'playlist', type: 'string'},
               {arg: 'trackuri', type: 'string'},
             ],
-          returns: {arg: 'Location', type: 'object'}
+          returns: {arg: 'Scrobble', type: 'object'}
         }
     );
 };

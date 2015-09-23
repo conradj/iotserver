@@ -1,11 +1,23 @@
+var Promise = require("bluebird");
+
 module.exports = function(Artist) {	
-	Artist.findOrCreateOnName = function(name, cb) {
+    
+    // once a model is attached to the data source
+    Artist.on('dataSourceAttached', function( obj ){
+        // wrap the whole model in Promise
+        // but we need to avoid 'validate' method 
+        Artist = Promise.promisifyAll( Artist, 
+            {filter: function(name, func, target){
+                return !( name == 'validate');
+            }} 
+        );
+    });
+    
+    Artist.findOrCreateOnName = function(name, cb) {
         Artist.findOrCreate({where: {Name: name} }, {Name: name}, function(err, instance) {
             if (err){
-              console.log("Artist.findOrCreateOnName error:", err);
               cb(null, err);
             }
-            console.log("Artist.findOrCreateOnName:", instance);
             cb(null, instance);  
         });
     };

@@ -9,7 +9,6 @@ module.exports = function(SoundChangeEvent) {
     
     SoundChangeEvent.beforeValidate = function(next, modelInstance) {
       //your logic goes here - don't use modelInstance
-      console.log(this);
       next();
     };
     

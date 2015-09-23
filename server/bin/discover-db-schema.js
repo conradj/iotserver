@@ -11,7 +11,6 @@ var tables = process.argv.slice(2); // send in the table name(s)
 ds.discoverModelDefinitions(function (err, models) { // this gets all of the tables in the db
   models.forEach(function (def) {
       // def.name ~ the model name
-<<<<<<< HEAD
       if ( ['acl', 'accesstoken', 'role', 'rolemapping', 'test', 'user'].indexOf( def.name ) == -1 ) { // don't do these ones
         if ((!tables) || (tables.indexOf( def.name) > -1)) {
           ds.discoverSchema(def.name, null, function (err, schema) {

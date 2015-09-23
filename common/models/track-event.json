@@ -72,10 +72,15 @@
   },
   "validations": [],
   "relations": {
-    "events": {
+    "event": {
       "type": "belongsTo",
       "model": "Event",
       "foreignKey": "id"
+    },
+    "track": {
+      "type": "belongsTo",
+      "model": "Track",
+      "foreignKey": "TrackID"
     }
   },
   "acls": [],

@@ -1,72 +1,73 @@
-var gulp = require('gulp'),
-    watch = require('gulp-watch'),
-    htmlreplace = require('gulp-html-replace'),
-    del = require('del'),
-    shell = require('gulp-shell'),
-    tar = require('gulp-tar'),
-    gzip = require('gulp-gzip'),
-    deploySlug = require('gulp-heroku-deploy-slug');
+//var gulp = require('gulp');
+//var browserSync = require('browser-sync').create();
 
-var foldersToCopy = [
-    'package.json',
-    'procfile',
-    './common/**',
-    './client/bin/**',
-    './client/templates/**'
-];
-
-gulp.task('clean', function (cb) {
-    del('./dist/**', cb);
-});
-
-
-gulp.task('deploy-server', function() {
-    gulp.src('./server/**')
-    .pipe(gulp.dest('./dist/server/'))
-})
-
-gulp.task('deploy-folders', function() {
-    gulp.src(foldersToCopy, {base: './' })
-    .pipe(gulp.dest('./dist/'))
-});
-
-gulp.task('deploy-client-modules', shell.task([
-    'jspm bundle-sfx --minify lib/main ./dist/client/app.js;'
-]));
-
-
-gulp.task('tar', function () {
-    return gulp.src('dist/*')
-    .pipe(tar('archive.tar'))
-    .pipe(gzip())
-    .pipe(gulp.dest('tar'));
-});
-
-gulp.task('deploy-tar-heroku', function () {
-    return gulp.src('./tar/archive.tar.gz') // Or get it some other way 
-    .pipe(deploySlug({
-        app: 'shiny-shiny-shiny',
-        slug: {
-            process_types: {
-                //web: 'node-v0.10.20-linux-x64/bin/node slc run'
-                web: 'slc run'
-            }
+// Static server
+/*
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        server: {
+            baseDir: "./client/"
         }
-    }));
+    });
+    
+    gulp.watch("*.css").on("change", browserSync.reload);
+});
+*/
+
+'use strict';
+
+var gulp = require('gulp');
+var browserSync = require('browser-sync');
+var nodemon = require('gulp-nodemon');
+
+// we'd need a slight delay to reload browsers
+// connected to browser-sync after restarting nodemon
+var BROWSER_SYNC_RELOAD_DELAY = 500;
+
+gulp.task('nodemon', function (cb) {
+    var called = false;
+    return nodemon({
+
+        // nodemon our expressjs server
+        script: 'server/server.js',
+
+        // watch core server file(s) that require server restart on change
+        watch: ['server/server.js']
+    })
+        .on('start', function onStart() {
+        // ensure start only got called once
+        if (!called) { cb(); }
+        called = true;
+    })
+        .on('restart', function onRestart() {
+        // reload connected browsers after a slight delay
+        setTimeout(function reload() {
+            browserSync.reload({
+                stream: false   //
+            });
+        }, BROWSER_SYNC_RELOAD_DELAY);
+    });
+});
+
+gulp.task('browser-sync', ['nodemon'], function () {
+
+    // for more browser-sync config options: http://www.browsersync.io/docs/options/
+    browserSync.init({
+
+        // watch the following files; changes will be injected (css & images) or cause browser to refresh
+        files: ['client/**/*.*'],
+
+        // informs browser-sync to proxy our expressjs app which would run at the following location
+        proxy: 'http://localhost:3000',
+
+        // informs browser-sync to use the following port for the proxied app
+        // notice that the default port is 3000, which would clash with our expressjs
+        port: 4000,
+
+        // open the proxied app in chrome
+        browser: ['google-chrome']
+    });
 });
 
 
-gulp.task('deploy-web', ['deploy-folders', 'deploy-client-modules'], function() {
-    gulp.src('./client/index.html')
-    .pipe(htmlreplace({js: ['bin/traceur-runtime.js', 'app.js']}))
-    .pipe(gulp.dest('./dist/client/'));
-});
-
-
-gulp.task('deploy', ['clean', 'deploy-server', 'deploy-web']);
-
-// Build production files, the default task
-gulp.task('default', ['clean'], function (cb) {
-    //runSequence('styles', ['jshint', 'html', 'images', 'fonts', 'copy'], cb);
-});
-
+gulp.task('default', ['browser-sync']);

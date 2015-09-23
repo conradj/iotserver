@@ -65,5 +65,9 @@
   "Track": {
     "dataSource": "db",
     "public": true
+  },
+  "TrackAudio": {
+    "dataSource": "db",
+    "public": true
   }
 }

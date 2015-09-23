@@ -72,20 +72,21 @@
   },
   "validations": [],
   "relations": {
-    "Location": {
+    "location": {
       "type": "belongsTo",
       "model": "Location",
-      "foreignKey": "LocationID"
+      "foreignKey": "id"
     },
-    "SoundChangeEvent": {
+    "soundChangeEvent": {
       "type": "hasOne",
       "model": "SoundChangeEvent",
       "foreignKey": "id"
     },
-    "TrackEvent": {
-      "type": "hasOne",
-      "model": "TrackEvent",
-      "foreignKey": "id"
+    "track": {
+      "type": "hasMany",
+      "model": "Track",
+      "foreignKey": "id",
+      "through": "TrackEvent"
     }
   },
   "acls": [],
