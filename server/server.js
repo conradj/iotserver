@@ -1,56 +1,42 @@
-var http = require('http')
-var port = process.env.PORT || 1337;
-var pg = require('pg');
-var conString = process.env.ELEPHANTSQL_URL || "";
-// var client = new pg.Client(conString);
-// 
-// http.createServer(function(req, res) {
-//   client.connect(function(err) {
-//     if(err) {
-//       return console.error('could not connect to postgres', err);
-//     }
-//     client.query('SELECT NOW() AS "theTime"', function(err, result) {
-//       if(err) {
-//         return console.error('error running query', err);
-//       }
-//       res.write(process.env.NODE_ENV + "\n");
-//       console.log(result.rows[0].theTime);
-//       res.write(result.rows[0].theTime + "\n");
-//       res.write('Hello World\n');
-//       //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
-//       //client.end();
-//     });
-//   });
-// }).listen(port);
+/// <reference path="../typings/node/node.d.ts"/>
+var loopback = require('loopback');
+var boot = require('loopback-boot');
+//var sse = require('server-sent-events');
+var app = module.exports = loopback();
+var socketIO = require('socket.io');
 
-var pg = require('pg');
+// Bootstrap the application, configure models, datasources and middleware.
+// Sub-apps like REST API are mounted via boot scripts.
+boot(app, __dirname);
 
-var server = http.createServer(function (req, res) {
-  
-       pg.connect(conString, function(err, client) {
-         console.log('connect');
-         var query = client.query('SELECT "Name" FROM "public"."Genre" LIMIT 100', function(err, result) {
-            if (err) throw err;
-            console.log('callback');
-            res.writeHead(200, {'Content-Type': 'text/html'});
-            res.write(result.rows[0].Name + "\n");
-            res.write(process.env.NODE_ENV + "\n");
-            res.end('Hello Worldww\n');
-            });
+app.start = function() {
+  // start the web server
+  return app.listen(function() {
+    app.emit('started');
+      console.log('a user sdasdass');
+    console.log('Web server listening atssss: %s', app.get('url'));
+  });
+};
 
-         query.on('end', function() {
-                 console.log('close');
-                 // client.end(); -- not needed, client will return to the pool on drain
-                 });
+// start the server if `$ node server.js`
+if (require.main === module) {
+  var server = app.start();
+   // initialize socket.io and store it in the app instance
+  app.io = socketIO(server);
+    
+    app.io.on('connection', function(socket){
+      console.log('a user connected');
+    });
 
-       });
+}
 
- 
-  // these shouldn't be here either if you plan to write to res from within the pg 
-  // callback
- 
+//app.listen(process.env.PORT);
 
-}).listen(port);
-
-
-
+/*app.use('/room', function(req, res, next ) { 
+    console.log("doestnsi work");
+  res.sse("dsds"); 
+    console.log("doestnsi work2");
+    return;
+})*/
+    
+    
