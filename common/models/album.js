@@ -29,4 +29,32 @@ module.exports = function(Album) {
           returns: {arg: 'Album', type: 'object'}
         }
     );
+    
+    Album.test = function(cb) {
+        Album.find({
+           //"where": { "Name": "Herman Dune" },
+            "include": {"relation": "artist", 
+                "scope": {"where":{"id": {inq: [1, 2]}}}}
+            }
+        , function(err, instance) {
+            if (err){
+              cb(null, err);
+            }
+            cb(null, instance);    
+        });
+    }
+    
+    // Artist.find({"filter": {
+    //                 "where": {"id": $state.params.id},
+    //                 "include": {"relation": "classes", "scope": {"include": ["students"]}}
+    //           }
+    // })
+    
+    Album.remoteMethod(
+        'test',
+        {
+            http: {path: '/test', verb: 'get'},
+            returns: {arg: 'Album', type: 'object'}
+        }
+    );
 };

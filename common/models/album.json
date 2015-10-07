@@ -96,6 +96,11 @@
       "type": "belongsTo",
       "model": "Genre",
       "foreignKey": "GenreID"
+    },
+    "tracks": {
+      "type": "hasMany",
+      "model": "Track",
+      "foreignKey": "AlbumID"
     }
   },
   "acls": [],

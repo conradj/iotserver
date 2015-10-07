@@ -29,4 +29,44 @@ module.exports = function(Artist) {
           returns: {arg: 'Artist', type: 'object'}
         }
     );
+    
+    Artist.test = function(cb) {
+        Artist.find( {
+                //"where": { "Name": "Herman Dune" },
+                //"where": { "albums": { "neq": null}},
+                "include": { "relation": "albums",
+                    "scope": { 
+                        "where": {
+                            "Title": { "inq": ["Max Cambios", "The Waterfall"]}
+                        }
+                    }
+                }
+            }
+        , function(err, instance) {
+            if (err){
+              cb(null, err);
+            }
+            
+            var test = instance.filter(function(artist) {
+                    return artist.toJSON().albums.length > 0;
+                }
+            )
+            
+            cb(null, test);    
+        });
+    }
+    
+    // Artist.find({"filter": {
+    //                 "where": {"id": $state.params.id},
+    //                 "include": {"relation": "classes", "scope": {"include": ["students"]}}
+    //           }
+    // })
+    
+    Artist.remoteMethod(
+        'test',
+        {
+            http: {path: '/test', verb: 'get'},
+            returns: {arg: 'Artist', type: 'object'}
+        }
+    );
 };
