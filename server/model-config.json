@@ -4,6 +4,8 @@
       "loopback/common/models",
       "loopback/server/models",
       "../common/models",
+      "./common/models",
+      "common/models",
       "./models"
     ]
   },
