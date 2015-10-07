@@ -1,10 +1,16 @@
-{
+var dbhost = process.env.DB_HOST,
+  dbname = process.env.DB_NAME,
+  dbusername = dbname,
+  dbpassword = process.env.DB_PASSWORD;
+  
+
+module.exports = {
   "db": {
-    "host": "localhost",
+    "host": dbhost,
     "port": 5432,
-    "database": "Conrad",
-    "username": "Conrad",
-    "password": "password",
+    "database": dbname,
+    "username": dbusername,
+    "password": dbpassword,
     "name": "db",
     "connector": "postgresql"
   },
