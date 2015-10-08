@@ -92,6 +92,9 @@ selectNodeVersion () {
     NPM_CMD=npm
     NODE_EXE=DEBUG=loopback* node
   fi
+  
+  echo "node exe"
+  echo NODE_EXE
 }
 
 ##################################################################################################################################
