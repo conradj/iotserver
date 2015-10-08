@@ -90,11 +90,8 @@ selectNodeVersion () {
     NPM_CMD="\"$NODE_EXE\" \"$NPM_JS_PATH\""
   else
     NPM_CMD=npm
-    NODE_EXE=DEBUG=loopback* node
+    NODE_EXE=node
   fi
-  
-  echo "node exe"
-  echo "\"$NODE_EXE\" \"$NPM_JS_PATH\""
 }
 
 ##################################################################################################################################
