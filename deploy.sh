@@ -122,6 +122,7 @@ fi
 # Post deployment stub
 if [[ -n "$POST_DEPLOYMENT_ACTION" ]]; then
   POST_DEPLOYMENT_ACTION=${POST_DEPLOYMENT_ACTION//\"}
+  echo "Post deploy"
   cd "${POST_DEPLOYMENT_ACTION_DIR%\\*}"
   "$POST_DEPLOYMENT_ACTION"
   exitWithMessageOnError "post deployment action failed"
