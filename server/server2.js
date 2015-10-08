@@ -8,6 +8,8 @@ var boot = require('loopback-boot');
 var app = module.exports = loopback();
 var socketIO = require('socket.io');
 
+boot(app, __dirname);
+
 var server = http.createServer(function (req, res) {
   
        pg.connect(conString, function(err, client) {
