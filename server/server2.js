@@ -10,6 +10,28 @@ var socketIO = require('socket.io');
 
 boot(app, __dirname);
 
+app.start = function() {
+  console.log('start');
+  // start the web server
+  return app.listen(function() {
+    app.emit('started');
+    console.log('a user sdasdas');
+    console.log('Web server listening atssss: %s', app.get('url'));
+  });
+};
+
+if (require.main === module) {
+  console.log('main');
+  var server = app.start();
+   // initialize socket.io and store it in the app instance
+  // app.io = socketIO(server);
+  //   
+  //   app.io.on('connection', function(socket){
+  //     console.log('a user connected');
+  //   });
+
+}
+
 var server = http.createServer(function (req, res) {
   
        pg.connect(conString, function(err, client) {
