@@ -3,7 +3,7 @@ var dbhost = process.env.DB_HOST,
   dbusername = dbname,
   dbpassword = process.env.DB_PASSWORD;
   
-
+console.log("PRODUCTION");
 module.exports = {
   "db": {
     "host": dbhost,

@@ -7,7 +7,6 @@ module.exports = function(Album) {
         // but we need to avoid 'validate' method 
         Album = Promise.promisifyAll( Album, 
             {filter: function(name, func, target){
-                console.log(name);
                 return !( name == 'validate');
             }} 
         );
