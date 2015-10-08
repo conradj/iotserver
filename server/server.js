@@ -10,6 +10,7 @@ var socketIO = require('socket.io');
 boot(app, __dirname);
 
 app.start = function() {
+  console.log('start');
   // start the web server
   return app.listen(function() {
     app.emit('started');
@@ -20,6 +21,7 @@ app.start = function() {
 
 // start the server if `$ node server.js`
 if (require.main === module) {
+  console.log('main');
   var server = app.start();
    // initialize socket.io and store it in the app instance
   app.io = socketIO(server);
