@@ -20,7 +20,7 @@ app.start = function() {
 };
 
 // start the server if `$ node server.js`
-if (require.main === module) {
+//if (require.main === module) {
   console.log('main');
   var server = app.start();
    // initialize socket.io and store it in the app instance
@@ -30,7 +30,7 @@ if (require.main === module) {
       console.log('a user connected');
     });
 
-}
+//}
 
 //app.listen(process.env.PORT);
 
