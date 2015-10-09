@@ -13,21 +13,26 @@ module.exports = function(TrackAudio) {
     });
     
     TrackAudio.findOrCreateSearch = function(artistName, trackId, trackTitle) {
+        console.log("$$$ TrackAudio.findOrCreateSearch 1");
         return TrackAudio.findOneAsync({ where: { id: trackId } })
         .then(function(trackAudio) {
+            console.log("$$$ trackaudio FIND");
             TrackAudio.app.io.emit('eventmsg', {text: "trackaudiofind" });
             if(trackAudio) {
+                console.log("$$$ trackaudio FOUND");
                 TrackAudio.app.io.emit('eventmsg', {text: "trackaudiofound" });
                 /// TODO check CheckedDate and update if it hasn't been checked for a while
                 return trackAudio;
             } else {
                 return TrackAudio.createAttributes(artistName, trackId, trackTitle)
             }
+            console.log("$$$ trackaudio WAAAH");
             TrackAudio.app.io.emit('eventmsg', {text: "waah" });
         });
     }
     
     TrackAudio.createAttributes = function(artistName, trackId, trackTitle) {
+        console.log("$$$ TrackAudio.createAttributes 1");
         return TrackAudio.app.dataSources.echonest.search(artistName, trackTitle)
         .then(function(json, context) {
             var audio_summary,
@@ -36,7 +41,7 @@ module.exports = function(TrackAudio) {
             trackAudio = {
                 id: trackId
             };
-
+            console.log("$$$ Echonested new new");       
             TrackAudio.app.io.emit('eventmsg', {text: "Echonested new new" });
                 //response object returned has an object called "response" *sigh*
             if(json.response.songs.length > 0) {
@@ -61,6 +66,7 @@ module.exports = function(TrackAudio) {
                     danceability: audio_summary.danceability
                 }
             }
+            console.log("$$$ about to save track audio"); 
             TrackAudio.app.io.emit('eventmsg', {text: "about to save track audio" });
             return TrackAudio.app.models.TrackAudio.createAsync(trackAudio);
         });
