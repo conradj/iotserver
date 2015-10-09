@@ -26,26 +26,32 @@ module.exports = function(TrackAudio) {
             } else {
                 return TrackAudio.createAttributes(artistName, trackId, trackTitle)
             }
-            console.log("$$$ trackaudio WAAAH");
+            console.log("$$$ trackaudio FOUND");
             TrackAudio.app.io.emit('eventmsg', {text: "waah" });
         });
     }
     
     TrackAudio.createAttributes = function(artistName, trackId, trackTitle) {
         console.log("$$$ TrackAudio.createAttributes 1");
-        return TrackAudio.app.dataSources.echonest.search(artistName, trackTitle)
+        var echoNestSearchAsync = Promise.promisify(TrackAudio.app.dataSources.echonest.search);
+        return echoNestSearchAsync(artistName, trackTitle)
         .then(function(json, context) {
-            var audio_summary,
+            console.log(json);
+            var songResults,
+                audio_summary,
                 trackAudio;
 
             trackAudio = {
                 id: trackId
             };
+            
+            songResults = json[0].response.songs;
+            
             console.log("$$$ Echonested new new");       
             TrackAudio.app.io.emit('eventmsg', {text: "Echonested new new" });
                 //response object returned has an object called "response" *sigh*
-            if(json.response.songs.length > 0) {
-                audio_summary = json.response.songs[0].audio_summary;
+            if(songResults.length > 0) {
+                audio_summary = songResults[0].audio_summary;
                 trackAudio =
                 {
                     id: trackId,
