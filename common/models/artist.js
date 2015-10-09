@@ -14,6 +14,7 @@ module.exports = function(Artist) {
     });
     
     Artist.findOrCreateOnName = function(name, cb) {
+        console.log("##### Artist.findOrCreateOnName called");
         Artist.findOrCreate({where: {Name: name} }, {Name: name}, function(err, instance) {
             if (err){
               cb(null, err);
