@@ -36,7 +36,6 @@ module.exports = function(TrackAudio) {
         var echoNestSearchAsync = Promise.promisify(TrackAudio.app.dataSources.echonest.search);
         return echoNestSearchAsync(artistName, trackTitle)
         .then(function(json, context) {
-            console.log(json);
             var songResults,
                 audio_summary,
                 trackAudio;
