@@ -38,6 +38,9 @@ module.exports = function(Event) {
         trackuri,
         cb) {
             console.log("##### SCROBBLE CALLED");
+            console.log("##### Artist: " + artistName);
+            console.log("##### Album: " + albumName);
+            console.log("##### Track: " + trackName);
             var vm = { locationId: locationId };
             // make sure artist, track, album exist, otherwise create them
             Event.app.models.Artist.findOrCreateOnNameAsync(artistName)
