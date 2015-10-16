@@ -44,7 +44,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "events": {
+      "type": "hasMany",
+      "model": "Event",
+      "foreignKey": "LocationID"
+    }
+  },
   "acls": [],
   "methods": []
 }

@@ -102,10 +102,17 @@
       "model": "TrackAudio",
       "foreignKey": "id"
     },
-    "trackEvent": {
+    "trackevent": {
       "type": "hasOne",
       "model": "TrackEvent",
       "foreignKey": "TrackID"
+    },
+    "events": {
+      "type": "hasMany",
+      "model": "Event",
+      "foreignKey": "TrackID",
+      "through": "TrackEvent",
+      "keyThrough": "id"
     }
   },
   "acls": [],

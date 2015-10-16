@@ -77,16 +77,22 @@
       "model": "Location",
       "foreignKey": "id"
     },
-    "soundChangeEvent": {
+    "soundchangeevent": {
       "type": "hasOne",
       "model": "SoundChangeEvent",
+      "foreignKey": "id"
+    },
+    "trackevent": {
+      "type": "hasOne",
+      "model": "TrackEvent",
       "foreignKey": "id"
     },
     "track": {
       "type": "hasMany",
       "model": "Track",
       "foreignKey": "id",
-      "through": "TrackEvent"
+      "through": "TrackEvent",
+      "keyThrough": "TrackID"
     }
   },
   "acls": [],
