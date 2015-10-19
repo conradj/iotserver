@@ -1,22 +1,22 @@
-<head>
-    <link rel="import" href="/templates/room.html">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Aurelia</title>
+    <link rel="stylesheet" href="jspm_packages/npm/font-awesome@4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/styles.css">
-</head>
-<body>
-    Wacka wacka wickasssasasa
-    <div id="event-messages"></div>
-    <div id='rooms-container'></div>
-    <script src="/socket.io/socket.io.js"></script>
-    <!-- build:js -->
-    <script src="../jspm_packages/system.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body aurelia-app="main">
+    <div class="splash">
+      <div class="message">Aurelia Navigation Skeleton</div>
+      <i class="fa fa-spinner fa-spin"></i>
+    </div>
+
+    <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
     <script>
-        System.import('lib/main');
+      System.import('aurelia-bootstrapper');
     </script>
-    <!--
-    Gulp deploy task will replace above with below refs to:
-    <script src="bin/traceur-runtime.js"></script>
-    <script src="app.js"></script>
-    -->
-    <!-- endbuild -->
-</body>
+  </body>
+</html>

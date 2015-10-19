@@ -11,6 +11,8 @@
 *.swp
 *.swo
 node_modules
+jspm_packages
+bower_components
 coverage
 *.tgz
 *.xml

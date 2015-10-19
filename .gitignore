@@ -38,3 +38,5 @@ dist
 # typescript intellisense files for VSCode
 typings
 .DS_Store
+
+build/reports

@@ -1,0 +1,9 @@
+<template>
+    <section>
+        <h1>${location.Name}</h1>
+        <ul>
+            <li repeat.for="event of events">Track Name: ${event.track[0].Title}</li>
+        </ul>
+        <h2>${events[0].track}</h2>
+    </section>
+</template>
