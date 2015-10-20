@@ -9,7 +9,7 @@
   ],
   "main": "server/server.js",
   "engines": {
-    "node": "0.12.7"
+    "node": "0.12.6"
   },
   "scripts": {
     "pretest": "jshint .",
