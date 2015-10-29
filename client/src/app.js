@@ -1,6 +1,6 @@
 export class App {
   configureRouter(config, router) {
-    config.title = 'TotterUp';
+    config.title = 'TotterUps';
     config.map([
       { route: ['', 'home'], name: 'home',      moduleId: 'home',      nav: true, title: 'Home' },
       { route: 'users',         name: 'users',        moduleId: 'users',        nav: true, title: 'Github Users' },

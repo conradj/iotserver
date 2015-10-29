@@ -5,7 +5,7 @@ var config = {
   force: true,
   packagePath: '.',
   bundles: {
-    "dist/app-build": {
+    "client/dist/app-build": {
       includes: [
         '*',
         '*.html!text',
@@ -17,7 +17,7 @@ var config = {
         minify: true
       }
     },
-    "dist/aurelia": {
+    "client/dist/aurelia": {
       includes: [
         'aurelia-bootstrapper',
         'aurelia-fetch-client',
