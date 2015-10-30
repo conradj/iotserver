@@ -114,7 +114,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
   echo NPM install.
   eval $NPM_CMD install
-  exitWithMessageOnError "npm failed."
+  exitWithMessageOnError "npm failed"
   echo jspm install.
   eval "node_modules/.bin/jspm install"
   exitWithMessageOnError "jspm failed"
