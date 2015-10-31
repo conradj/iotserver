@@ -80,7 +80,7 @@ selectNodeVersion () {
     
     if [[ -e "$DEPLOYMENT_TEMP/.tmp" ]]; then
       NPM_JS_PATH=`cat "$DEPLOYMENT_TEMP/__npmVersion.tmp"`
-      exitWithMessageOnError "getting npm version failed"
+      exitWithMessageOnError "getting npm version failed."
     fi
     
     NPM_JS_PATH=%ProgramFiles(x86)%\npm\2.14.2\node_modules\npm\bin\npm-cli.js
