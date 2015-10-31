@@ -115,18 +115,18 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   echo NPM install.
   eval $NPM_CMD install
   exitWithMessageOnError "npm failed"
-  echo jspm install.
-  eval "node_modules/.bin/jspm install"
-  exitWithMessageOnError "jspm failed"
+  #echo jspm install.
+  #eval "node_modules/.bin/jspm install"
+  #exitWithMessageOnError "jspm failed"
   cd - > /dev/null
 fi
 
 # 5. Run gulp transformations
 if [ -e "$DEPLOYMENT_TARGET/gulpfile.js" ]; then
   cd "$DEPLOYMENT_TARGET"
-  echo gulp deploy.
-  eval "./node_modules/.bin/gulp deploy"
-  exitWithMessageOnError "gulp failed"
+  #echo gulp deploy.
+  #eval "./node_modules/.bin/gulp deploy"
+  #exitWithMessageOnError "gulp failed"
   cd - > /dev/null
 fi
 
