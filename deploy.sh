@@ -86,7 +86,7 @@ selectNodeVersion () {
     if [[ ! -n "$NODE_EXE" ]]; then
       NODE_EXE=node
     fi
-
+    echo select npm version $NPM_JS_PATH
     NPM_CMD="\"$NODE_EXE\" \"$NPM_JS_PATH\""
   else
     NPM_CMD=npm
