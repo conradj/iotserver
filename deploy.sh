@@ -86,7 +86,7 @@ selectNodeVersion () {
     echo deploymenttemp $DEPLOYMENT_TEMP
     echo __npmVersion.tmp
     echo select npm version a $NPM_JS_PATH
-    NPM_JS_PATH="$ProgramFiles(x86)/npm/2.14.4"
+    NPM_JS_PATH="$ProgramFiles(x86)/npm/2.14.4/node_modules/npm/bin/npm-cli.js"
 
     if [[ ! -n "$NODE_EXE" ]]; then
       NODE_EXE=node
