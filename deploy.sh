@@ -82,6 +82,9 @@ selectNodeVersion () {
       NPM_JS_PATH=`cat "$DEPLOYMENT_TEMP/__npmVersion.tmp"`
       exitWithMessageOnError "getting npm version failed."
     fi
+    
+    echo deploymenttemp $DEPLOYMENT_TEMP
+    echo __npmVersion.tmp
     echo select npm version a $NPM_JS_PATH
     NPM_JS_PATH="$ProgramFiles(x86)/npm/2.14.4"
 
