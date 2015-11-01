@@ -83,8 +83,8 @@ selectNodeVersion () {
       exitWithMessageOnError "getting npm version failed."
     fi
     
-    echo select npm version a $NPM_JS_PATH
-    NPM_JS_PATH="D:/Program Files (x86)/npm/2.14.4/node_modules/npm/bin/npm-cli.js"
+    #echo select npm version a $NPM_JS_PATH
+    #NPM_JS_PATH="D:/Program Files (x86)/npm/2.14.4/node_modules/npm/bin/npm-cli.js"
     
     if [[ ! -n "$NODE_EXE" ]]; then
       NODE_EXE=node
