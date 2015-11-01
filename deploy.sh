@@ -83,8 +83,6 @@ selectNodeVersion () {
       exitWithMessageOnError "getting npm version failed."
     fi
     
-    echo deploymenttemp $DEPLOYMENT_TEMP
-    
     echo select npm version a $NPM_JS_PATH
     NPM_JS_PATH="D:/Program Files (x86)/npm/2.14.4/node_modules/npm/bin/npm-cli.js"
     
@@ -120,9 +118,9 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   echo NPM install.
   eval $NPM_CMD install
   exitWithMessageOnError "npm failed"
-  echo jspm install.
-  eval "node_modules/.bin/jspm install"
-  exitWithMessageOnError "jspm failed"
+  #echo jspm install.
+  #eval "node_modules/.bin/jspm install"
+  #exitWithMessageOnError "jspm failed"
   cd - > /dev/null
 fi
 
