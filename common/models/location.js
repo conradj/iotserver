@@ -23,7 +23,7 @@ module.exports = function(Location) {
 //        console.log('after request:', ctx.req);
 //        console.log('after result:', ctx.res);
 //        Location.app.io.emit('roommsg', ctx.instance);
-//      next();
+//      next();ss
 //    });
     
     Location.findOrCreateOnName = function(name, cb) {

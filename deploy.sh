@@ -87,7 +87,7 @@ selectNodeVersion () {
       NODE_EXE=node
     fi
     # ensure node version is set in azure environment variables
-    echo select npm version b $NPM_JS_PATH
+    #echo select npm version b $NPM_JS_PATH
     # original line NPM_CMD="\"$NODE_EXE\" \"$NPM_JS_PATH\""
     NPM_CMD="\"$NODE_EXE\" \"$PROGRAMFILES\\npm\\3.3.9\\node_modules\\npm\\bin\\npm-cli.js\""
   else
@@ -113,6 +113,8 @@ selectNodeVersion
 # 3. Install npm packages
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
+  echo NPM version.
+  eval $NPM_CMD -v
   echo NPM install.
   eval $NPM_CMD install
   exitWithMessageOnError "npm failed"

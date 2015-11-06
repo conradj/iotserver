@@ -14,8 +14,8 @@ app.start = function() {
   // start the web server
   return app.listen(function() {
     app.emit('started');
-      console.log('a user sdasdas');
-    console.log('Web server listening atssss: %s', app.get('url'));
+      console.log('a user connected, probably');
+    console.log('Web server listening at: %s', app.get('url'));
   });
 };
 

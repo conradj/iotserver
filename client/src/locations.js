@@ -6,7 +6,7 @@ import {bindable} from 'aurelia-framework';
 @inject(HttpClient)
 export class Locations {
   @bindable locations = null;
-  heading = 'Locations';
+  heading = 'Location';
   locations = [];
 
   constructor(http) {

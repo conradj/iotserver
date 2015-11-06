@@ -11,7 +11,7 @@ export class Location {
         //this.events = [];
         //let socket = io('localhost');
         this.firstEvent = {};
-        console.log("constr");
+        console.log("constrs");
         console.log(this.location);
         http.configure(config => {
             config
