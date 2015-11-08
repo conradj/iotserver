@@ -40,7 +40,7 @@ export class Location {
     }
     
     bind() {
-        return this.http.fetch('Locations/' + this.location.id + '/events?filter={%22include%22:{%22track%22:[%22album%22,%20%22artist%22]},%22where%22:{%22EventTypeID%22:%221%22},%22limit%22:10,%22skip%22:0,%22order%22:%22CreateDate%20DESC%22}')
+        return this.http.fetch('Locations/' + this.location.id + '/events?filter={%22include%22:{%22track%22:[%22album%22,%20%22artist%22,%20%22audio%22]},%22where%22:{%22EventTypeID%22:%221%22},%22limit%22:10,%22skip%22:0,%22order%22:%22CreateDate%20DESC%22}')
             .then(response => response.json())
             .then(events => this.events = events)
             .then(events => console.log(events))
