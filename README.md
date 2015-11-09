@@ -1,25 +1,18 @@
 # IOTServer
+Node.js, loopback.js, JSPM, Aurelia, Gulp + Azure
 
-We use loopback.io for the Node.JS API so first do:
+API and web front end for IoT devices
+
+Loopback.io for the Node.JS API so first do:
 `npm install -g strongloop`
 
-AAAAnd we're using [http://jspm.io/](JSPM) for front end package management, ES6 compilation and bundling so do:
+AAAAnd [http://jspm.io/](JSPM) for front end package management, ES6 compilation and bundling so do:
 `npm install jspm -g`
 
-1. `npm install for server dependencies`
-2. `jspm install for client dependencies`
-3. `slc run`
-
+1. `npm install` for server dependencies
+2. `jspm install` for client dependencies
+3. `gulp watch` and navigate to `http://localhost:4000`
 
 PRODUCTION (or... "Production")
 
-`jspm bundle-sfx lib/main app.js`
-Include in index.html
-Also need Traceur runtime if you are using ES6 features (hopefully not for long https://github.com/systemjs/builder/issues/46)
-
-
-For heroku...
-
-http://docs.strongloop.com/display/SL/Heroku
-
-`heroku apps:create --buildpack https://github.com/strongloop/strongloop-buildpacks.git
+Included is an Azure deployment file which sets it up in production and create a JSPM bundle of JS.
