@@ -127,9 +127,9 @@ fi
 # 5. Run gulp transformations
 if [ -e "$DEPLOYMENT_TARGET/gulpfile.js" ]; then
   cd "$DEPLOYMENT_TARGET"
-  #echo gulp deploy.
-  #eval "./node_modules/.bin/gulp deploy"
-  #exitWithMessageOnError "gulp failed"
+  echo gulp deploy.
+  eval "./node_modules/.bin/gulp deploy"
+  exitWithMessageOnError "gulp failed"
   cd - > /dev/null
 fi
 
