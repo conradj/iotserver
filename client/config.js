@@ -47,6 +47,7 @@ System.config({
     "errorhandler": "npm:errorhandler@1.4.2",
     "fetch": "github:github/fetch@0.9.0",
     "font-awesome": "npm:font-awesome@4.4.0",
+    "moment": "npm:moment@2.10.6",
     "serve-favicon": "npm:serve-favicon@2.3.0",
     "socket.io": "npm:socket.io@1.3.7",
     "text": "github:systemjs/plugin-text@0.0.2",
@@ -560,6 +561,9 @@ System.config({
     "npm:mime-types@2.1.7": {
       "mime-db": "npm:mime-db@1.19.0",
       "path": "github:jspm/nodelibs-path@0.1.0"
+    },
+    "npm:moment@2.10.6": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:nan@1.6.2": {
       "path": "github:jspm/nodelibs-path@0.1.0"
