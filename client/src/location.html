@@ -1,7 +1,7 @@
 <template>
     <section>
         <h1>${location.Name}</h1>
-        <div repeat.for="event of events" class="row">
+        <div repeat.for="event of events" class="row event" click.delegate="event.toggleTrackAttributes()">
             <div class="media">
                 <div class="media-left">
                     <a href="#">
@@ -11,6 +11,20 @@
                 <div class="media-body">
                     <h4 class="media-heading">${event.track[0].Title} <small>${event.playedFromNow}</small></h4>
                     <p>${event.track[0].artist.Name}</p>
+                    <div show.bind="event.viewAttributes">
+                        <p>Danceability: ${event.track[0].audio.danceability}</p>
+                        <p>Energy: ${event.track[0].audio.energy}</p>
+                        <p>Valence (happiness): ${event.track[0].audio.valence}</p>
+                        <p>Tempo: ${event.track[0].audio.tempo}</p>
+                        <p>Acousticness: ${event.track[0].audio.acousticness}</p>
+                        <p>Instrumentalness: ${event.track[0].audio.instrumentalness}</p>
+                        <p>Speechiness: ${event.track[0].audio.speechiness}</p>
+                        <p>Liveness: ${event.track[0].audio.liveness}</p>
+                        <p>Key: ${event.track[0].audio.key} ${event.track[0].audio.mode} ${event.track[0].audio.loudness}dB</p>
+                        <p>Time signature: ${event.track[0].audio.time_signature}</p>
+                        <p>Duration: ${event.track[0].audio.duration}</p>
+                        <p>Echonest ${event.track[0].audio.DateChecked}</p>
+                    </div>
                 </div>
             </div>
         </div>
