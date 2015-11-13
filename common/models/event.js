@@ -41,7 +41,8 @@ module.exports = function(Event) {
             console.log("##### Artist: " + artistName);
             console.log("##### Album: " + albumName);
             console.log("##### Track: " + trackName);
-            var vm = { locationId: locationId };
+            var vm = { LocationId: locationId, Track: [] };
+            
             // make sure artist, track, album exist, otherwise create them
             Event.app.models.Artist.findOrCreateOnNameAsync(artistName)
             .then(function(artist){
@@ -78,8 +79,16 @@ module.exports = function(Event) {
                 console.log("##### track audio...done");
                 Event.app.io.emit('toastmsg', "track audio done");
                 vm.trackAudio = trackAudio;
-                Event.app.io.emit('eventmsg', vm); 
-                cb(null, vm);
+                // create an Event graph to send back to client
+                var eventScrobbleVM = vm.event.toJSON();
+                eventScrobbleVM.LocationID = vm.LocationId;
+                eventScrobbleVM.track = [];
+                eventScrobbleVM.track[0] = vm.track.toJSON();
+                eventScrobbleVM.track[0].album = vm.album.toJSON();
+                eventScrobbleVM.track[0].artist = vm.artist.toJSON();
+                eventScrobbleVM.track[0].audio = vm.trackAudio.toJSON();
+                Event.app.io.emit('event-location-' + vm.LocationId, eventScrobbleVM);
+                cb(null, eventScrobbleVM);
             })
             .catch(console.error);
     }
@@ -95,7 +104,7 @@ module.exports = function(Event) {
               {arg: 'playlist', type: 'string'},
               {arg: 'trackuri', type: 'string'},
             ],
-          returns: {arg: 'Scrobble', type: 'object'}
+          returns: {arg: 'Event', type: 'object'}
         }
     );
 };

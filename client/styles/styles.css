@@ -173,3 +173,20 @@ div.au-stagger {
     opacity: 1;
   }
 }
+
+@keyframes grow {
+  0% {
+    opacity: 0;
+    max-height: 0;
+  }
+  
+  100% {
+    opacity: 1;
+    height: auto;
+    max-height: 500px;
+  }
+}
+
+.event {
+  animation: grow 2s;
+}

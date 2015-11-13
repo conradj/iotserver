@@ -17,17 +17,17 @@ module.exports = function(TrackAudio) {
         return TrackAudio.findOneAsync({ where: { id: trackId } })
         .then(function(trackAudio) {
             console.log("$$$ trackaudio FIND");
-            TrackAudio.app.io.emit('eventmsg', {text: "trackaudiofind" });
+            TrackAudio.app.io.emit('toastmsg', {text: "trackaudiofind" });
             if(trackAudio) {
                 console.log("$$$ trackaudio FOUND");
-                TrackAudio.app.io.emit('eventmsg', {text: "trackaudiofound" });
+                TrackAudio.app.io.emit('toastmsg', {text: "trackaudiofound" });
                 /// TODO check CheckedDate and update if it hasn't been checked for a while
                 return trackAudio;
             } else {
                 return TrackAudio.createAttributes(artistName, trackId, trackTitle)
             }
             console.log("$$$ trackaudio FOUND");
-            TrackAudio.app.io.emit('eventmsg', {text: "waah" });
+            TrackAudio.app.io.emit('toastmsg', {text: "waah" });
         });
     }
     
@@ -47,7 +47,7 @@ module.exports = function(TrackAudio) {
             songResults = json[0].response.songs;
             
             console.log("$$$ Echonested new new");       
-            TrackAudio.app.io.emit('eventmsg', {text: "Echonested new new" });
+            TrackAudio.app.io.emit('toastmsg', {text: "Echonested new new" });
                 //response object returned has an object called "response" *sigh*
             if(songResults.length > 0) {
                 audio_summary = songResults[0].audio_summary;
@@ -72,7 +72,7 @@ module.exports = function(TrackAudio) {
                 }
             }
             console.log("$$$ about to save track audio"); 
-            TrackAudio.app.io.emit('eventmsg', {text: "about to save track audio" });
+            TrackAudio.app.io.emit('toastmsg', {text: "about to save track audio" });
             return TrackAudio.app.models.TrackAudio.createAsync(trackAudio);
         });
     }
