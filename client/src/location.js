@@ -14,7 +14,8 @@ export class Location {
   }
   
   bind() {
-    let  socket = io('http://localhost:4000');
+    //let  socket = io('http://localhost:4000');
+    let  socket = io();
     socket.on(`event-location-${this.location.id}`, (data) => { 
       this.events.unshift(new Event(data));
     });
