@@ -22,7 +22,6 @@ var config = {
         'aurelia-bootstrapper',
         'aurelia-fetch-client',
         'aurelia-router',
-        'aurelia-animator-css',
         'github:aurelia/templating-binding',
         'github:aurelia/templating-resources',
         'github:aurelia/templating-router',
