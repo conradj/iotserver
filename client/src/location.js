@@ -1,9 +1,9 @@
-import {customElement, bindable, inject, bindingEngine} from 'aurelia-framework';
+import {customElement, bindable, inject, BindingEngine} from 'aurelia-framework';
 import {EventService} from './event-service';  
 import {Event} from './models/event';
 import io from 'socket.io-client';
 
-@inject(EventService, bindingEngine)
+@inject(EventService, BindingEngine)
 @customElement('location')
 export class Location {
   @bindable location = {};
@@ -11,17 +11,17 @@ export class Location {
     
   constructor(eventService, bindingEngine){
     this.eventService = eventService;
+    this.bindingEngine = bindingEngine;
   }
   
   bind() {
-    //let  socket = io('http://localhost:4000');
     let  socket = io();
     socket.on(`event-location-${this.location.id}`, (data) => { 
       this.events.unshift(new Event(data));
     });
     
     // subscribe
-    let subscription = bindingEngine.collectionObserver(this.events).subscribe();
+    let subscription = this.bindingEngine.collectionObserver(this.events).subscribe();
     // unsubscribe
     subscription.dispose();
     
