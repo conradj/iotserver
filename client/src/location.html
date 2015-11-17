@@ -1,4 +1,5 @@
 <template>
+    <require from="./from-now"></require>
     <section>
         <h1>${location.Name}</h1>
         <div repeat.for="event of events" class="row event" click.delegate="event.toggleTrackAttributes()">
@@ -9,7 +10,7 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading">${event.track[0].Title} <small>${event.playedFromNow}</small></h4>
+                    <h4 class="media-heading">${event.track[0].Title} <small>${event.CreateDate}</small></h4>
                     <p>${event.track[0].artist.Name}</p>
                     <div show.bind="event.viewAttributes">
                         <p>Danceability: ${event.track[0].audio.danceability}</p>
