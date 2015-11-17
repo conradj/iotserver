@@ -1,4 +1,13 @@
+import {inject} from 'aurelia-framework';
+import {BindingSignaler} from 'aurelia-templating-resources';
+
+@inject(BindingSignaler)
 export class App {
+  constructor(signaler) {
+    // refresh all bindings with the signal name "tick" every minute:
+    setInterval(() => signaler.signal('tick'), 60 * 1000);
+  }
+  
   configureRouter(config, router) {
     config.title = 'TotterUp';
     config.map([
