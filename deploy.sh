@@ -119,7 +119,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   eval $NPM_CMD install
   exitWithMessageOnError "npm failed"
   echo jspm install.
-  eval "node_modules/.bin/jspm install"
+  eval "node_modules/.bin/jspm install aurelia-animator-css aurelia-binding aurelia-bootstrapper aurelia-dependency-injection aurelia-framework aurelia-fetch-client aurelia-router aurelia-event-aggregator aurelia-history-browser aurelia-loader-default aurelia-loader aurelia-metadata aurelia-route-recognizer aurelia-templating-binding aurelia-templating-resources aurelia-templating-router aurelia-templating aurelia-logging aurelia-task-queue aurelia-history aurelia-path aurelia-pal aurelia-pal-browser"
   exitWithMessageOnError "jspm failed"
   cd - > /dev/null
 fi
