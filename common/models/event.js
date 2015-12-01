@@ -45,41 +45,46 @@ module.exports = function(Event) {
             // make sure artist, track, album exist, otherwise create them
             Event.app.models.Artist.findOrCreateOnNameAsync(artistName)
             .then(function(artist){
+                console.log("##### artist saved")
                 vm.artist = artist;
                 return Event.app.models.Album.findOrCreateOnTitleAndArtistAsync(albumName, vm.artist.id);
             })
             .then(function(album) {
                 console.log("##### album saved");
-                Event.app.io.emit('toastmsg', "album saved");
+                console.log(album);
+                //Event.app.io.emit('toastmsg', "album saved");
+                
                 vm.album = album;
                 vm.album["artist"] = vm.artist;
+                console.log(vm.artist.id, vm.album.id, trackName);
                 return Event.app.models.Track.findOrCreateOnArtistAlbumAndTitleAsync(
                     vm.artist.id, vm.album.id, trackName);
             })
             .then(function(track) {
                 console.log("##### track saved");
-                Event.app.io.emit('toastmsg', "track saved");
+                //Event.app.io.emit('toastmsg', "track saved");
                 vm.track = track;
                 return Event.createAsync({ LocationID: locationId, EventTypeID: 1 });
             })
             .then(function(event) {
                 console.log("##### event saved");
-                Event.app.io.emit('toastmsg', "event saved");
+                //Event.app.io.emit('toastmsg', "event saved");
                 vm.event = event;
                 return Event.app.models.TrackEvent.createAsync({ id: vm.event.id, TrackID: vm.track.id });
             })
             .then(function(trackEvent) {
                 console.log("##### track event saved");
-                Event.app.io.emit('toastmsg', "track event saved");
+                //Event.app.io.emit('toastmsg', "track event saved");
                 vm.trackEvent = trackEvent;
                 return Event.app.models.TrackAudio.findOrCreateSearch(vm.artist.Name, vm.track.id, vm.track.Title);
             })
             .then(function(trackAudio) {
                 console.log("##### track audio...done");
-                Event.app.io.emit('toastmsg', "track audio done");
+                //Event.app.io.emit('toastmsg', "track audio done");
                 vm.trackAudio = trackAudio;
-                Event.app.io.emit('eventmsg', vm); 
-                cb(null, vm);
+                //Event.app.io.emit('eventmsg', vm); 
+                if(cb)
+                    cb(null, vm);
             })
             .catch(console.error);
     }
