@@ -6,7 +6,7 @@
     "username": "Conrad",
     "password": "password",
     "name": "db",
-    "connector": "postgresql"
+    "connector": "memory"
   },
   "echonest": {
     "name": "echonest",

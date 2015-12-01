@@ -1,0 +1,51 @@
+{
+	"locations": [
+		{"name": "Kitchen"},
+		{"name": "Living Room 1"},
+		{"name": "Living Room 2"},
+		{"name": "Matilda's Room"}	
+	],
+	"artists": 
+	[
+		{
+			"name": "R.E.M.",
+			"albums": 
+			[
+				{ 
+					"title": "Automatic for the People",
+					"tracks": 
+					[
+						{ "title": "Drive" }
+					]
+				},
+				{ 
+					"title": "Murmur" ,
+					"tracks": 
+					[
+						{ "title": "Radio Free Europe" }
+					]
+				}
+			]
+		},
+		{
+			"name": "Portishead",
+			"albums": 
+			[
+				{ 
+					"title": "Dummy",
+					"tracks": 
+					[
+						{ "title": "Numb" }
+					]
+				},
+				{ 
+					"title": "Live at NYC",
+					"tracks":
+					[
+						{ "title": "Numb" }
+					]
+				}
+			]
+		}
+	]
+}

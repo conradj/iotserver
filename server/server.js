@@ -4,6 +4,7 @@ var boot = require('loopback-boot');
 //var sse = require('server-sent-events');
 var app = module.exports = loopback();
 var socketIO = require('socket.io');
+var seedDB = require('./bin/seed-db.js');
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
@@ -11,6 +12,7 @@ boot(app, __dirname);
 
 app.start = function() {
   console.log('start');
+  seedDB(app);
   // start the web server
   return app.listen(function() {
     app.emit('started');
@@ -29,16 +31,3 @@ app.start = function() {
     app.io.on('connection', function(socket){
       console.log('a user connected');
     });
-
-//}
-
-//app.listen(process.env.PORT);
-
-/*app.use('/room', function(req, res, next ) { 
-    console.log("doestnsi work");
-  res.sse("dsds"); 
-    console.log("doestnsi work2");
-    return;
-})*/
-    
-    
