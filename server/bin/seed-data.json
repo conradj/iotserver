@@ -15,14 +15,40 @@
 					"title": "Automatic for the People",
 					"tracks": 
 					[
-						{ "title": "Drive" }
+						{ "title": "Drive" },
+						{ "title": "Try Not to Breathe" },
+						{ "title": "The Sidewinder Sleeps Tonite" },
+						{ "title": "Everybody Hurts" },
+						{ "title": "New Orleans Instrumental No. 1" },
+						{ "title": "Sweetness Follows" },
+						{ "title": "Monty Got a Raw Deal" },
+						{ "title": "Ignoreland" },
+						{ "title": "Star Me Kitten" },
+						{ "title": "Man on the Moon" },
+						{ "title": "Nightswimming" },
+						{ "title": "Find the River" }
 					]
 				},
 				{ 
 					"title": "Murmur" ,
 					"tracks": 
 					[
-						{ "title": "Radio Free Europe" }
+						{ "title": "Laughing" },
+						{ "title": "Pilgrimage" },
+						{ "title": "There She Goes Again" },
+						{ "title": "Seven Chinese Brothers" },
+						{ "title": "Talk About the Passion" },
+						{ "title": "Sitting Still" },
+						{ "title": "Harborcoat" },
+						{ "title": "Catapult" },
+						{ "title": "Gardening at Night" },
+						{ "title": "9-9" },
+						{ "title": "Just a Touch" },
+						{ "title": "West of the Fields" },
+						{ "title": "Radio Free Europe" },
+						{ "title": "We Walk" },
+						{ "title": "1,000,000" },
+						{ "title": "Carnival of Sorts (Box Cars)" }
 					]
 				}
 			]
@@ -35,14 +61,34 @@
 					"title": "Dummy",
 					"tracks": 
 					[
-						{ "title": "Numb" }
+						{ "title": "Mysterons" },
+						{ "title": "Sour Times" },
+						{ "title": "Strangers" },
+						{ "title": "It Could Be Sweet" },
+						{ "title": "Wandering Star" },
+						{ "title": "It's a Fire" },
+						{ "title": "Numb" },
+						{ "title": "Roads" },
+						{ "title": "Pedestal" },
+						{ "title": 	"Biscuit" },
+						{ "title": 	"Glory Box" }
 					]
 				},
 				{ 
 					"title": "Live at NYC",
 					"tracks":
 					[
-						{ "title": "Numb" }
+						{ "title": "Humming"  },
+						{ "title": "Cowboys" },
+						{ "title": "All Mine" },
+						{ "title": "Mysterons" },
+						{ "title": "Only You" },
+						{ "title": "Half Day  Closing" },
+						{ "title": "Over" },
+						{ "title": "Glory Box " },
+						{ "title": "Sour Times" },
+						{ "title": "Roads" },
+						{ "title": "Strangers" }
 					]
 				}
 			]
