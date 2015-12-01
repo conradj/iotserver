@@ -87,9 +87,9 @@ selectNodeVersion () {
       NODE_EXE=node
     fi
     # ensure node version is set in azure environment variables
-    #echo select npm version b $NPM_JS_PATH
-    # original line NPM_CMD="\"$NODE_EXE\" \"$NPM_JS_PATH\""
-    NPM_CMD="\"$NODE_EXE\" \"$PROGRAMFILES\\npm\\3.3.9\\node_modules\\npm\\bin\\npm-cli.js\""
+    echo select npm version b $NPM_JS_PATH
+    NPM_CMD="\"$NODE_EXE\" \"$NPM_JS_PATH\""
+    # NPM_CMD="\"$NODE_EXE\" \"$PROGRAMFILES\\npm\\3.3.9\\node_modules\\npm\\bin\\npm-cli.js\""
   else
     NPM_CMD=npm
     NODE_EXE=node
