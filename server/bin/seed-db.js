@@ -9,35 +9,48 @@ module.exports = function seedDB(app) {
     var Location = app.models.Location;
     var Event = app.models.Event;
     
-    //console.log(Event.scrobbleAsync);
-    
     console.log('Seeed the deebee!');
     
     var locations = [];
-    var scrobbles = [];
     
-    locations.push(Location.create({name: 'Living Room 1'}));
+    for(var location in data.locations) {
+        console.log(data.locations[location].name);
+        locations.push(Location.createAsync({name: data.locations[location].name}));
+    }    
     
-    
-    //var scrobbleAsync = Promise.Promisify(Event.scrobble);
-    
-    for(var artist in data.artists) {
-        for(var album in data.artists[artist].albums) {
-            for(var track in data.artists[artist].albums[album].tracks) {
-            scrobbles.push(Event.scrobbleAsync(1, 
-                data.artists[artist].albums[album].title,
-                data.artists[artist].name,
-                data.artists[artist].albums[album].tracks[track].title)
-            )}      
-        }
-    }
-    
-    Promise.all(locations).then(function() {
+    Promise.all(locations).then(function(createdLocations) {
         console.log("all the locations were created");
-        return Promise.all(scrobbles);
+        var scrobbles = [];
+        for(var location in createdLocations) {
+            for(var artist in shuffleArray(data.artists)) {
+                for(var album in shuffleArray(data.artists[artist].albums)) {
+                    for(var track in shuffleArray(data.artists[artist].albums[album].tracks)) {
+                        scrobbles.push(Event.scrobbleAsync(createdLocations[location].id, 
+                            data.artists[artist].albums[album].title,
+                            data.artists[artist].name,
+                            data.artists[artist].albums[album].tracks[track].title)
+                        )
+                    }      
+                }
+            }
+        }
+        return scrobbles;
     })
-    .then(function() {
+    .then(function(scrobblePromises) {
+        return Promise.all(scrobblePromises);
+    })
+    .then(function(scrobbleVMs) {
         console.log("all the scrobbles were created");
     });
-
+    
+    
+    function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        return array;
+    }
 }
