@@ -41,20 +41,22 @@ module.exports = function(Event) {
             console.log("##### Artist: " + artistName);
             console.log("##### Album: " + albumName);
             console.log("##### Track: " + trackName);
-            var vm = { LocationId: locationId, Track: [] };
+            var vm = { LocationId: locationId, Track: [] },
+                models = Event.app.models;
             
             // make sure artist, track, album exist, otherwise create them
             Event.app.models.Artist.findOrCreateOnNameAsync(artistName)
             .then(function(artist){
                 vm.artist = artist;
-                return Event.app.models.Album.findOrCreateOnTitleAndArtistAsync(albumName, vm.artist.id);
+                return models.Album.findOrCreateOnTitleAndArtistAsync(albumName, vm.artist.id);
             })
             .then(function(album) {
                 console.log("##### album saved");
                 Event.app.io.emit('toastmsg', "album saved");
                 vm.album = album;
                 vm.album["artist"] = vm.artist;
-                return Event.app.models.Track.findOrCreateOnArtistAlbumAndTitleAsync(
+            
+                return models.Track.findOrCreateOnArtistAlbumAndTitleAsync(
                     vm.artist.id, vm.album.id, trackName);
             })
             .then(function(track) {
@@ -67,18 +69,50 @@ module.exports = function(Event) {
                 console.log("##### event saved");
                 Event.app.io.emit('toastmsg', "event saved");
                 vm.event = event;
-                return Event.app.models.TrackEvent.createAsync({ id: vm.event.id, TrackID: vm.track.id });
+                return models.TrackEvent.createAsync({ id: vm.event.id, TrackID: vm.track.id });
             })
             .then(function(trackEvent) {
                 console.log("##### track event saved");
                 Event.app.io.emit('toastmsg', "track event saved");
                 vm.trackEvent = trackEvent;
-                return Event.app.models.TrackAudio.findOrCreateSearch(vm.artist.Name, vm.track.id, vm.track.Title);
+                return models.TrackAudio.findOneAsync({ where: { id: vm.track.id } })
             })
             .then(function(trackAudio) {
                 console.log("##### track audio...done");
                 Event.app.io.emit('toastmsg', "track audio done");
-                vm.trackAudio = trackAudio;
+                
+                if ((!trackAudio) || (!vm.artist.musicbrainzId)) {
+                    // need to get the track attributes from echonest
+                    return [ models.TrackAudio.getAttributes(vm.artist.Name, vm.track.id, vm.track.Title), trackAudio];
+                } else {
+                    return [null, trackAudio];
+                }
+            })
+            .spread(function(echonest, trackAudio) {
+                console.log("##### echonest...done");
+                Event.app.io.emit('toastmsg', "echonest done");
+                
+                var promises = [];
+                vm.trackAudio = trackAudio; // maybe empty but echonest should return track audio if it is
+                
+                if(echonest) {
+                    if((echonest.trackAudio) && (!trackAudio)) {
+                        // store the echonest attributes in the db
+                        vm.trackAudio = echonest.trackAudio;
+                        promises.push(models.TrackAudio.createAsync(echonest.trackAudio));
+                    }
+                    
+                    if((echonest.artistmusicbrainzId) && (!vm.artist.musicbrainzId)) {
+                        vm.artist.musicbrainzId = echonest.artistmusicbrainzId;
+                        promises.push(vm.artist.updateAttributeAsync('musicbrainzId', echonest.artistmusicbrainzId));
+                    }
+                }
+                
+                return Promise.all(promises);
+            })
+            .then(function() {
+                console.log("##### all...done");
+                Event.app.io.emit('toastmsg', "ALL done");
                 // create an Event graph to send back to client
                 var eventScrobbleVM = vm.event.toJSON();
                 eventScrobbleVM.LocationID = vm.LocationId;

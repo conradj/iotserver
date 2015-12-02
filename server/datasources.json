@@ -11,10 +11,14 @@
   "echonest": {
     "name": "echonest",
     "connector": "rest",
+    "debug": true,
     "operations": [
       {
         "template": {
-          "useQuerystring": true,
+          "options": {
+            "useQuerystring": true,
+            "json": false 
+          },
           "debug": true,
           "method": "GET",
           "url": "http://developer.echonest.com/api/v4/song/search",
@@ -27,13 +31,20 @@
             "results": "{results=1}",
             "artist": "{artist}",
             "title": "{title}",
-            "bucket": "{bucket=audio_summary}"
+            "bucket": [
+              "{audio_summary}",
+              "{tracks}",
+              "{identifier}"
+            ]
           }
         },
         "functions": {
           "search": [
             "artist",
             "title",
+            "audio_summary",
+            "tracks",
+            "identifier",
             "results"
           ]
         }

@@ -38,6 +38,21 @@
         "dataScale": null,
         "nullable": "YES"
       }
+    },
+    "musicbrainzId": {
+      "type": "String",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "MusicbrainzID",
+        "dataType": "text",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      }
     }
   },
   "validations": [],
