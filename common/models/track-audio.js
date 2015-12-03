@@ -31,8 +31,8 @@ module.exports = function(TrackAudio) {
             };
         
         songResults = echonestresults.songs;
-        if(songResults.length > 0) {
-            if(songResults[0].artist_foreign_ids.length > 0) {
+        if(songResults && songResults.length > 0) {
+            if((songResults[0].artist_foreign_ids) && (songResults[0].artist_foreign_ids.length > 0)) {
                 // foreign_id = musicbrainz:artist:ea4dfa26-f633-4da6-a52a-f49ea4897b58
                 echonest.artistmusicbrainzId = songResults[0].artist_foreign_ids[0].foreign_id.split(':')[2];
             }    

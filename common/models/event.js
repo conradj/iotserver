@@ -117,7 +117,7 @@ module.exports = function(Event) {
                 return Promise.all(promises);
             })
             .then(function() {
-                console.log('get mb release id', vm.artist.musicbrainzId);
+                console.log('get mb release id for artist mb:', vm.artist.musicbrainzId);
                     
                 if((vm.artist.musicbrainzId) && (!vm.album.musicbrainzId)) {
                     var getMBReleaseGroupIdAsync = Promise.promisify(app.dataSources.musicbrainz.getReleaseGroup);
@@ -128,11 +128,14 @@ module.exports = function(Event) {
                 }
             })
             .then(function(json, context) {
-                console.log("##### MB id...done");
-                if((!vm.album.musicbrainzId) &&  (json[0]['release-groups'][0])) {
+                console.log("##### release MB id...done");
+                
+                if((!vm.album.musicbrainzId) && (json) && (json[0]) && (json[0]['release-groups']) && (json[0]['release-groups'][0])) {
                     vm.album.musicbrainzId = json[0]['release-groups'][0].id;
+                    console.log("##### release MB id: ", vm.album.musicbrainzId);
                     return vm.album.updateAttributeAsync('musicbrainzId', vm.album.musicbrainzId)
                 }
+                console.log("##### no release MB found");
             })
             .then(function() {
                 console.log("##### all...done");
