@@ -15,5 +15,11 @@ gulp.task('watch', ['serve'], function() {
   gulp.watch(paths.source, ['build-system', browserSync.reload]).on('change', reportChange);
   gulp.watch(paths.html, ['build-html', browserSync.reload]).on('change', reportChange);
   gulp.watch(paths.css, ['build-css', browserSync.reload]).on('change', reportChange);
-  gulp.watch(paths.style, browserSync.reload).on('change', reportChange);
+  gulp.watch(paths.style, ['css']).on('change', reportChange);
+});
+
+// Compile sass into CSS & auto-inject into browsers
+gulp.task('css', function() {
+    return gulp.src(paths.style)
+        .pipe(browserSync.stream());
 });
