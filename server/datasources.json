@@ -50,5 +50,38 @@
         }
       }
     ]
+  },
+  "musicbrainz": {
+    "name": "musicbrainz",
+    "connector": "rest",
+    "debug": true,
+    "operations": [
+      {
+        "template": {
+          "options": {
+            "useQuerystring": true,
+            "json": false 
+          },
+          "debug": true,
+          "method": "GET",
+          "url": "http://musicbrainz.org/ws/2/release-group",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "query": {
+            "query": "{trackTitle} AND arid:{artistMusicbrainzId}",
+            "fmt": "{fmt=json}",
+            "inc": "{inc=url}",
+            "limit": "{limit=1}"
+          }
+        },
+        "functions": {
+          "getReleaseGroup": [
+            "trackTitle",
+            "artistMusicbrainzId"
+          ]
+        }
+      }
+    ]
   }
 }

@@ -41,8 +41,10 @@ module.exports = function(Event) {
             console.log("##### Artist: " + artistName);
             console.log("##### Album: " + albumName);
             console.log("##### Track: " + trackName);
+            
             var vm = { LocationId: locationId, Track: [] },
-                models = Event.app.models;
+                app = Event.app,
+                models = app.models;
             
             // make sure artist, track, album exist, otherwise create them
             Event.app.models.Artist.findOrCreateOnNameAsync(artistName)
@@ -88,17 +90,21 @@ module.exports = function(Event) {
                     return [null, trackAudio];
                 }
             })
-            .spread(function(echonest, trackAudio) {
+            .spread(function(echonest, trackAudioModel) {
                 console.log("##### echonest...done");
                 Event.app.io.emit('toastmsg', "echonest done");
                 
                 var promises = [];
-                vm.trackAudio = trackAudio; // maybe empty but echonest should return track audio if it is
+                vm.trackAudio = {};
+                if(trackAudioModel) {
+                    vm.trackAudio = trackAudioModel.toJSON();
+                }
                 
                 if(echonest) {
-                    if((echonest.trackAudio) && (!trackAudio)) {
+                    if((echonest.trackAudio) && (!trackAudioModel)) {
                         // store the echonest attributes in the db
                         vm.trackAudio = echonest.trackAudio;
+                        vm.trackAudio.id = vm.track.id;
                         promises.push(models.TrackAudio.createAsync(echonest.trackAudio));
                     }
                     
@@ -111,6 +117,24 @@ module.exports = function(Event) {
                 return Promise.all(promises);
             })
             .then(function() {
+                console.log('get mb release id', vm.artist.musicbrainzId);
+                    
+                if((vm.artist.musicbrainzId) && (!vm.album.musicbrainzId)) {
+                    var getMBReleaseGroupIdAsync = Promise.promisify(app.dataSources.musicbrainz.getReleaseGroup);
+                    // this also gets the musicbrainz artist ID
+                    return getMBReleaseGroupIdAsync(vm.album.Title, vm.artist.musicbrainzId);
+                } else {
+                    return {};
+                }
+            })
+            .then(function(json, context) {
+                console.log("##### MB id...done");
+                if((!vm.album.musicbrainzId) &&  (json[0]['release-groups'][0])) {
+                    vm.album.musicbrainzId = json[0]['release-groups'][0].id;
+                    return vm.album.updateAttributeAsync('musicbrainzId', vm.album.musicbrainzId)
+                }
+            })
+            .then(function() {
                 console.log("##### all...done");
                 Event.app.io.emit('toastmsg', "ALL done");
                 // create an Event graph to send back to client
@@ -120,11 +144,12 @@ module.exports = function(Event) {
                 eventScrobbleVM.track[0] = vm.track.toJSON();
                 eventScrobbleVM.track[0].album = vm.album.toJSON();
                 eventScrobbleVM.track[0].artist = vm.artist.toJSON();
-                eventScrobbleVM.track[0].audio = vm.trackAudio.toJSON();
+                eventScrobbleVM.track[0].audio = vm.trackAudio;
                 Event.app.io.emit('event-location-' + vm.LocationId, eventScrobbleVM);
                 cb(null, eventScrobbleVM);
             })
-            .catch(console.error);
+            .catch(console.error)
+           
     }
      
     Event.remoteMethod(
