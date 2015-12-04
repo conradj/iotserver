@@ -1,6 +1,6 @@
 {
   "name": "iotserver",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "keywords": [
     "aurelia",
     "loopback",
@@ -9,7 +9,7 @@
   ],
   "main": "server/server.js",
   "engines": {
-    "node": "0.12.6",
+    "node": ">=4.2.1",
     "npm": ">=3.3.9"
   },
   "scripts": {
