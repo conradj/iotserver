@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var paths = require('../paths');
 var browserSync = require('browser-sync');
+//var less = require('gulp-less');
 
 // outputs changes to files to the console
 function reportChange(event) {
@@ -23,3 +24,11 @@ gulp.task('css', function() {
     return gulp.src(paths.style)
         .pipe(browserSync.stream());
 });
+
+// gulp.task('less', function () {
+//   return gulp.src('./less/**/*.less')
+//     .pipe(less({
+//       paths: [ path.join(__dirname, 'less', 'includes') ]
+//     }))
+//     .pipe(gulp.dest('./public/css'));
+// });
