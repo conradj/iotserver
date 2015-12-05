@@ -192,11 +192,17 @@ div.au-stagger {
   color: #FFF;
   background-color: rgba(0, 0, 0, 0.2);
   text-shadow: 0 1px 0 black;
+  background-size: cover;
+  margin-bottom: 30px;
+  padding: 8px;
+  height: 0;
+  padding-bottom: 100%;
 }
 
  .background {
   content: "";
   position: fixed;
+  background-position: center; 
   left: 0mm;
   right: 0;
   z-index: -1;

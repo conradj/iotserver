@@ -2,7 +2,7 @@
     <require from="./from-now"></require>
     <section>
         <h1>${location.Name}</h1>
-        <div repeat.for="event of events" class="row event" click.delegate="event.toggleTrackAttributes()">
+        <div repeat.for="event of events" class="row event" css="background-image: url(${event.track[0].album.coverUrl})" click.delegate="event.toggleTrackAttributes()">
             <div class="media">
                 <div class="media-left">
                     <a href="#">
