@@ -1,22 +1,26 @@
 import {customElement, bindable, inject, BindingEngine} from 'aurelia-framework';
 import {EventService} from './event-service';  
+import {ImageService} from './image-service';  
 import {Event} from './models/event';
 import io from 'socket.io-client';
 
-@inject(EventService, BindingEngine)
+@inject(EventService, BindingEngine, ImageService)
 @customElement('location')
 export class Location {
   @bindable location = {};
   events = [];
     
-  constructor(eventService, bindingEngine){
+  constructor(eventService, bindingEngine, imageService){
     this.eventService = eventService;
+    this.imageService = imageService;
     this.bindingEngine = bindingEngine;
   }
   
   bind() {
     let  socket = io();
     socket.on(`event-location-${this.location.id}`, (data) => { 
+      let event = new Event(data);
+      this.imageService.manageCoverArt(event.album);
       this.events.unshift(new Event(data));
     });
     
@@ -25,8 +29,15 @@ export class Location {
     // unsubscribe
     subscription.dispose();
     
-    return this.eventService.getEventsByLocation(this.location.id).then(response => response.json())
-      .then(events => this.events = events.map(function(event) { return new Event(event) }))
-      .then(events => console.log(this.events))
+    return this.eventService.getEventsByLocation(this.location.id).then
+      (response => response.json()).then
+      (events => this.events = events.map(
+        (event) => {
+          let newEvent = new Event(event);
+          this.imageService.manageCoverArt(newEvent.track[0].album);
+          return newEvent;           
+        })
+      ).then
+      (events => console.log(this.events))
   }
 }

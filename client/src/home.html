@@ -1,7 +1,8 @@
 <template>
+  <require from="./cover-rotate"></require>
   <require from='locations'></require>
+  <div class="background" css="background-image: url(${covers | coverRotate & signal:'cover'})"></div>
   <section>
-        <h2>${heading}</h2>
         <locations></locations>
     </section>
 </template>

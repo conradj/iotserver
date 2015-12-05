@@ -13,6 +13,7 @@
                     <h4 class="media-heading">${event.track[0].Title} <small>${event.CreateDate | fromNow & signal:'tick'}</small></h4>
                     <p>${event.track[0].artist.Name}</p>
                     <div show.bind="event.viewAttributes">
+                        <p>${event.track[0].album.Title}</p>
                         <p>Danceability: ${event.track[0].audio.danceability}</p>
                         <p>Energy: ${event.track[0].audio.energy}</p>
                         <p>Valence (happiness): ${event.track[0].audio.valence}</p>

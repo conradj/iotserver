@@ -6,6 +6,7 @@ export class App {
   constructor(signaler) {
     // refresh all bindings with the signal name "tick" every minute:
     setInterval(() => signaler.signal('tick'), 60 * 1000);
+    setInterval(() => signaler.signal('cover'), 40 * 1000);
   }
   
   configureRouter(config, router) {

@@ -189,9 +189,12 @@ div.au-stagger {
 
 .event {
   animation: grow 2s;
+  color: #FFF;
+  background-color: rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 0 black;
 }
 
-body:before {
+ .background {
   content: "";
   position: fixed;
   left: 0mm;
@@ -199,14 +202,16 @@ body:before {
   z-index: -1;
   
   display: block;
-  background-image: url('http://www.coverartarchive.com/release-group/48a1839c-f4e0-3223-831f-fc36ca6ff7cf/front');
+  background-image: inherit;
   background-size: cover;
   width: 100%;
   height: 100%;
   
-  -webkit-filter: blur(5px);
-  -moz-filter: blur(5px);
-  -o-filter: blur(5px);
-  -ms-filter: blur(5px);
-  filter: blur(5px);
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(60px);
+  -o-filter: blur(60px);
+  -ms-filter: blur(60px);
+  filter: blur(10px);
+  
+  transition: background-image 1s ease-in-out;
 }

@@ -1,21 +1,12 @@
-import {customElement, inject, computedFrom} from 'aurelia-framework';
-import {HttpClient} from 'aurelia-fetch-client';  
-import {AlbumService} from '../album-service';
-import 'fetch';
+import {computedFrom} from 'aurelia-framework';
 
-@inject(AlbumService)
 export class Album {
-	constructor(data, albumService) {
-		Object.assign(this, data);	
-		this.albumService = albumService;
+	constructor(data) {
+		Object.assign(this, data);
 	}
 	
-	@computedFrom('musicbrainzId')
+	@computedFrom('coverUrl')
 	get thumbnail() {
-		if(!this.musicbrainzId) {
-			return "";
-		} else {
-			return `http://www.coverartarchive.com/release-group/${this.musicbrainzId}/front-250`;
-		}
+		return this.coverUrl ? this.coverUrl : '';
 	}
 }
