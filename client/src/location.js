@@ -20,9 +20,12 @@ export class Location {
     let  socket = io();
     socket.on(`event-location-${this.location.id}`, (data) => { 
       let event = new Event(data);
-      this.imageService.manageCoverArt(event.album);
+      console.log('scrobble', event.track[0].album);
+      this.imageService.manageCoverArt(event.track[0].album);
       this.events.unshift(new Event(data));
     });
+    
+    console.log('bind');
     
     // subscribe
     let subscription = this.bindingEngine.collectionObserver(this.events).subscribe();
