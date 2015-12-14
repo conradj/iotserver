@@ -41,6 +41,24 @@
         "dataScale": null,
         "nullable": "YES"
       }
+    },
+    "order": {
+      "type": "Number",
+      "required": false,
+      "index": {
+        "unique": true
+      },
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "Order",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      }
     }
   },
   "validations": [],
