@@ -1,10 +1,14 @@
 <template>
+  <require from="./cover-rotate"></require>
   <require from="nav-bar.html"></require>
   <require from="bootstrap/css/bootstrap.css"></require>
-
-  <nav-bar router.bind="router"></nav-bar>
-
   <div class="page-host">
+    <div class="background" css="background-image: url(${covers | coverRotate & signal:'cover'})">
+      
+    </div>
+    <nav-bar router.bind="router"></nav-bar>
+
+  
     <router-view></router-view>
   </div>
 </template>

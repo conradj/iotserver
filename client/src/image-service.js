@@ -1,7 +1,11 @@
+import {inject} from 'aurelia-framework';
+import {BindingSignaler} from 'aurelia-templating-resources';
+
+@inject(BindingSignaler)
 export class ImageService {
   covers = [];
-  constructor(){
-
+  constructor(signaler){
+      this.signaler = signaler;
   }
   
   manageCoverArt(album) {
@@ -28,6 +32,7 @@ export class ImageService {
         console.log('manageart2', album, 'cover loaded', frontCoverUrl);
         
         this.covers.push(frontCoverUrl);
+        this.signaler.signal('cover')
       };
       // set the source and see if it exists
       img.src = frontCoverUrl;

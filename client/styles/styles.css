@@ -1,4 +1,7 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+
 body {
+  font-family: 'Raleway', sans-serif;
   margin: 0;
 }
 
@@ -27,7 +30,7 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  top: 50px;
+  top: -15px;
   bottom: 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -38,15 +41,25 @@ body {
     position: absolute;
     left: 10px;
     right: 0;
-    top: 50px;
+    top: 15px;
     bottom: 0;
     overflow-y: inherit;
     overflow-x: inherit;
   }
 }
 
+nav-bar {
+  display: none;
+}
+
 section {
-  margin: 0 20px;
+  /*margin: 0 20px;*/
+}
+
+.column {
+  /*HACK*/
+  padding-left: 0px !important; 
+  padding-right: 0px !important;
 }
 
 .navbar-nav li.loader {
@@ -187,20 +200,47 @@ div.au-stagger {
   }
 }
 
+h1.location {
+    color: white;
+    position: fixed;
+    top: -20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 25%;
+    padding: 9px;
+} 
+
+.is-sticky {
+  
+}
+
+.event-container {
+  margin-top: 72px;
+}
+
 .event {
   animation: grow 2s;
   color: #FFF;
-  background-color: rgba(0, 0, 0, 0.2);
   text-shadow: 0 1px 0 black;
-  background-size: cover;
-  background-position: center;
-  margin-bottom: 30px;
+  background-size: cover !important;
+  background-position: center !important;
   padding: 8px;
   height: 0;
   padding-bottom: 100%;
 }
 
- .background {
+.event:after {
+  content: "";
+  background-image: inherit;
+  background-size: 67%;
+}
+
+
+
+.lastplayed {
+  color: rgb(200,200,200);
+}
+
+.background {
   content: "";
   position: fixed;
   background-position: center; 

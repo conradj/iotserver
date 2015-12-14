@@ -1,12 +1,24 @@
-import {inject} from 'aurelia-framework';
+import {inject, BindingEngine} from 'aurelia-framework';
 import {BindingSignaler} from 'aurelia-templating-resources';
+import {ImageService} from './image-service';
 
-@inject(BindingSignaler)
+@inject(ImageService, BindingEngine, BindingSignaler)
 export class App {
-  constructor(signaler) {
+  constructor(imageService, bindingEngine, signaler) {
     // refresh all bindings with the signal name "tick" every minute:
     setInterval(() => signaler.signal('tick'), 60 * 1000);
     setInterval(() => signaler.signal('cover'), 40 * 1000);
+    
+    this.imageService = imageService;
+    this.bindingEngine = bindingEngine;
+    this.covers = imageService.covers;
+  }
+  
+  bind() {
+    // subscribe
+    let subscription = this.bindingEngine.collectionObserver(this.imageService.covers).subscribe();
+    // unsubscribe
+    subscription.dispose();
   }
   
   configureRouter(config, router) {
