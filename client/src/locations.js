@@ -17,7 +17,7 @@ export class Locations {
 
     this.http = http;
     
-    this.http.fetch('locations')
+    this.http.fetch('locations?filter[order]=order%20ASC')
       .then(response => response.json())
       .then(locations => this.locations = locations);
   }
