@@ -30,7 +30,7 @@ module.exports = function(Event) {
     //     Event.app.io.emit('eventmsg', {test: "Hello World"});
     // }
     
-    Event.scrobble = function(locationId, 
+    Event.scrobble = function(locationName, 
         albumName,
         artistName,
         trackName,
@@ -42,12 +42,16 @@ module.exports = function(Event) {
             console.log("##### Album: " + albumName);
             console.log("##### Track: " + trackName);
             
-            var vm = { LocationId: locationId, Track: [] },
+            var vm = { Location: {name: locationName}, Track: [] },
                 app = Event.app,
                 models = app.models;
             
-            // make sure artist, track, album exist, otherwise create them
-            Event.app.models.Artist.findOrCreateOnNameAsync(artistName)
+            Event.app.models.Location.findOrCreateOnNameAsync(locationName)
+            .then(function(location) {
+                vm.location = location;
+                // make sure artist, track, album exist, otherwise create them
+                return Event.app.models.Artist.findOrCreateOnNameAsync(artistName);
+            })
             .then(function(artist){
                 vm.artist = artist;
                 return models.Album.findOrCreateOnTitleAndArtistAsync(albumName, vm.artist.id);
@@ -65,7 +69,7 @@ module.exports = function(Event) {
                 console.log("##### track saved");
                 Event.app.io.emit('toastmsg', "track saved");
                 vm.track = track;
-                return Event.createAsync({ LocationID: locationId, EventTypeID: 1 });
+                return Event.createAsync({ LocationID: vm.location.id, EventTypeID: 1 });
             })
             .then(function(event) {
                 console.log("##### event saved");
@@ -142,13 +146,13 @@ module.exports = function(Event) {
                 Event.app.io.emit('toastmsg', "ALL done");
                 // create an Event graph to send back to client
                 var eventScrobbleVM = vm.event.toJSON();
-                eventScrobbleVM.LocationID = vm.LocationId;
+                eventScrobbleVM.LocationID = vm.location.id;
                 eventScrobbleVM.track = [];
                 eventScrobbleVM.track[0] = vm.track.toJSON();
                 eventScrobbleVM.track[0].album = vm.album.toJSON();
                 eventScrobbleVM.track[0].artist = vm.artist.toJSON();
                 eventScrobbleVM.track[0].audio = vm.trackAudio;
-                Event.app.io.emit('event-location-' + vm.LocationId, eventScrobbleVM);
+                Event.app.io.emit('event-location-' + eventScrobbleVM.LocationID, eventScrobbleVM);
                 cb(null, eventScrobbleVM);
             })
             .catch(console.error)
@@ -159,7 +163,7 @@ module.exports = function(Event) {
         'scrobble', 
         {
           accepts: [
-              {arg: 'locationId', type: 'number'},
+              {arg: 'locationName', type: 'string'},
               {arg: 'albumName', type: 'string'},
               {arg: 'artistName', type: 'string'},
               {arg: 'trackName', type: 'string'},
