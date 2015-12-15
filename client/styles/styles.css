@@ -154,6 +154,21 @@ div.au-stagger {
   }
 }
 
+@keyframes barbeat {
+  0% {
+    height: 0%;
+  }
+  60% {
+    height: 90%;
+  }
+}
+
+@keyframes pulsate {
+    0% {opacity: 0.5;}
+    50% {opacity: 1.0;}
+    100% {opacity: 0.5;}
+}
+
 @keyframes fadeInRight {
   0% {
     opacity: 0;
@@ -200,32 +215,59 @@ div.au-stagger {
   }
 }
 
+column.container {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.column [class*="col"] {
+  display: inline-block;
+  float: none; /* Very important */
+}
+
+.events-container {
+  margin-top: 72px;
+}
+
+.event-container {
+  position: relative;
+}
+
+.events-header {
+  position: fixed;
+  z-index: 100;
+  
+}
+
+.location-header {
+  
+}
+
 h1.location {
     color: white;
     position: fixed;
     top: -20px;
-    background-color: rgba(0, 0, 0, 0.5);
+    /*background-color: rgba(0, 0, 0, 0.5);*/
     width: 25%;
     padding: 9px;
+    animation: pulsate ease-out;
+    animation-iteration-count: infinite; 
+    opacity: 0.5;
 } 
 
-.is-sticky {
-  
-}
-
-.event-container {
-  margin-top: 72px;
+.event-container,
+.event,
+.event-attributes {
+  height: 0;
+  padding-bottom: 100%;
 }
 
 .event {
+  position: absolute;
   animation: grow 2s;
   color: #FFF;
   text-shadow: 0 1px 0 black;
   background-size: cover !important;
   background-position: center !important;
-  padding: 8px;
-  height: 0;
-  padding-bottom: 100%;
 }
 
 .event:after {
@@ -234,7 +276,21 @@ h1.location {
   background-size: 67%;
 }
 
+.media {
+  padding: 8px;
+}
 
+.event-attributes {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  padding-bottom: 0%;
+  bottom: 0;
+  /*animation-name: barbeat;*/
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  /*transition: height ease-in-out;*/
+}
 
 .lastplayed {
   color: rgb(200,200,200);
@@ -259,6 +315,5 @@ h1.location {
   -o-filter: blur(60px);
   -ms-filter: blur(60px);
   filter: blur(10px);
-  
   transition: background-image 1s ease-in-out;
 }
