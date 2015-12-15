@@ -30,7 +30,7 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  top: -15px;
+  top: 0px;
   bottom: 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -164,9 +164,7 @@ div.au-stagger {
 }
 
 @keyframes pulsate {
-    0% {opacity: 0.5;}
     50% {opacity: 1.0;}
-    100% {opacity: 0.5;}
 }
 
 @keyframes fadeInRight {
@@ -215,27 +213,42 @@ div.au-stagger {
   }
 }
 
-column.container {
-    overflow-x: auto;
-    white-space: nowrap;
-}
-.column [class*="col"] {
-  display: inline-block;
-  float: none; /* Very important */
-}
-
-.events-container {
-  margin-top: 72px;
+.main-container {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right:0;
 }
 
-.event-container {
-  position: relative;
-}
-
-.events-header {
-  position: fixed;
-  z-index: 100;
+.h-scroller {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
+  height: 100%;
   
+}
+
+.column-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  height: 100%;
+  width: 25%;
+}
+
+@media (max-width: 800px) {
+  .column-container {
+    width: 100%;
+  }
+}
+
+.event-header-container {
+  height: 50px;
+  position: relative;
+  line-height: 50px;
 }
 
 .location-header {
@@ -243,16 +256,56 @@ column.container {
 }
 
 h1.location {
+    font-family: 'Raleway', sans-serif;
     color: white;
-    position: fixed;
-    top: -20px;
-    /*background-color: rgba(0, 0, 0, 0.5);*/
-    width: 25%;
+    /*position: fixed;*/
+    /*top: -20px;*/
     padding: 9px;
     animation: pulsate ease-out;
     animation-iteration-count: infinite; 
     opacity: 0.5;
+    margin: 0px;
 } 
+
+.events-container {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.v-scroller {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+.column {
+  /*overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+  width: 25%;
+  display: inline-block;*/
+}
+
+.event-container {
+  /*position: relative;*/
+}
+
+.events-header {
+  /*position: fixed;*/
+  /*z-index: 100;*/
+  
+}
+
 
 .event-container,
 .event,
@@ -262,6 +315,7 @@ h1.location {
 }
 
 .event {
+  font-family: 'Raleway', sans-serif;
   position: absolute;
   animation: grow 2s;
   color: #FFF;
@@ -278,6 +332,12 @@ h1.location {
 
 .media {
   padding: 8px;
+}
+
+.event-metadata {
+  height: 0;
+  padding-bottom: 80%;
+  overflow-y: scroll;
 }
 
 .event-attributes {

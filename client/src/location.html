@@ -1,46 +1,55 @@
 <template>
     <require from="./from-now"></require>
     <section>
-        <div class="events-container">
-            <div class="event-container events-header">
-                <div class="location-header"><h1 class="location" css="animation-duration: ${events[0].bpm}; background-color: hsla(${events[0].hue}, ${events[0].saturation}, ${events[0].lightness}, ${events[0].alpha});">${location.Name}</h1></div>
+        <div class="event-header-container">
+            <div class="location-header">
+                <h1 class="location" css="animation-duration: ${events[0].bpm};
+                opacity: ${events[0].opacity}; 
+                background-color: hsla(${events[0].hue}, ${events[0].saturation}, ${events[0].lightness}, ${events[0].alpha});
+                ">
+                ${location.Name}
+                </h1>
             </div>
-            <div class="event-container" repeat.for="event of events">
-                <div class="clearfix event" css="background:
-                linear-gradient(
-                    to bottom,
-                    rgba(0, 0, 0, 0.6),
-                    rgba(0, 0, 0, 0) 20%
-                    ), 
-                    url(${event.track[0].album.coverUrl})" click.delegate="event.toggleTrackAttributes()">
-                    <div class="media">
-                        <div class="media-body">
-                            <h4 class="media-heading">${event.track[0].Title} <small class="lastplayed">${event.CreateDate | fromNow & signal:'tick'}</small></h4>
-                            <p>${event.track[0].artist.Name}</p>
-                            <div show.bind="event.viewAttributes">
-                                <p>${event.track[0].album.Title}</p>
-                                <p>Danceability: ${event.track[0].audio.danceability}</p>
-                                <p>Energy: ${event.track[0].audio.energy}</p>
-                                <p>Valence (happiness): ${event.track[0].audio.valence}</p>
-                                <p>Tempo: ${event.track[0].audio.tempo}</p>
-                                <p>Acousticness: ${event.track[0].audio.acousticness}</p>
-                                <p>Instrumentalness: ${event.track[0].audio.instrumentalness}</p>
-                                <p>Speechiness: ${event.track[0].audio.speechiness}</p>
-                                <p>Liveness: ${event.track[0].audio.liveness}</p>
-                                <p>Loudness: ${event.track[0].audio.loudness}</p>
-                                <p>Key: ${event.track[0].audio.key} ${event.track[0].audio.mode} ${event.track[0].audio.loudness}dB</p>
-                                <p>Time signature: ${event.track[0].audio.time_signature}</p>
-                                <p>Duration: ${event.track[0].audio.duration}</p>
-                                <p>Echonest ${event.track[0].audio.DateChecked}</p>
-                                <p>MusicBrainz Album: ${event.track[0].artist.musicbrainzId}</p>
-                                <p>MusicBrainz Release Group: ${event.track[0].album.musicbrainzId}</p>
+        </div>
+        <div class="events-container">
+            <div class="v-scroller">
+                <div class="event-container" repeat.for="event of events">
+                    <div class="clearfix event" css="background:
+                    linear-gradient(
+                        to bottom,
+                        rgba(0, 0, 0, 0.6),
+                        rgba(0, 0, 0, 0) 20%
+                        ), 
+                        url(${event.track[0].album.coverUrl})" click.delegate="event.toggleTrackAttributes()">
+                        <div class="media">
+                            <div class="media-body">
+                                <h4 class="media-heading">${event.track[0].Title} <small class="lastplayed">${event.CreateDate | fromNow & signal:'tick'}</small></h4>
+                                <p>${event.track[0].artist.Name}</p>
+                                <div class="event-metadata" show.bind="event.viewAttributes">
+                                    <p>${event.track[0].album.Title}</p>
+                                    <p>Danceability: ${event.track[0].audio.danceability}</p>
+                                    <p>Energy: ${event.track[0].audio.energy}</p>
+                                    <p>Valence (happiness): ${event.track[0].audio.valence}</p>
+                                    <p>Tempo: ${event.track[0].audio.tempo}</p>
+                                    <p>Acousticness: ${event.track[0].audio.acousticness}</p>
+                                    <p>Instrumentalness: ${event.track[0].audio.instrumentalness}</p>
+                                    <p>Speechiness: ${event.track[0].audio.speechiness}</p>
+                                    <p>Liveness: ${event.track[0].audio.liveness}</p>
+                                    <p>Loudness: ${event.track[0].audio.loudness}</p>
+                                    <p>Key: ${event.track[0].audio.key} ${event.track[0].audio.mode} ${event.track[0].audio.loudness}dB</p>
+                                    <p>Time signature: ${event.track[0].audio.time_signature}</p>
+                                    <p>Duration: ${event.track[0].audio.duration}</p>
+                                    <p>Echonest ${event.track[0].audio.DateChecked}</p>
+                                    <p>MusicBrainz Album: ${event.track[0].artist.musicbrainzId}</p>
+                                    <p>MusicBrainz Release Group: ${event.track[0].album.musicbrainzId}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="event-attributes">
-                </div>
-            </div>    
-        </div>
+                    <div class="event-attributes">
+                    </div>
+                </div> 
+            </div>        
+        </div>    
     </section>
 </template>

@@ -11,6 +11,7 @@ export class Event {
 		this.lightness = (this.track[0].audio.valence ? this.track[0].audio.valence * 100 : 0) + "%"; //;
 		this.alpha = (this.track[0].audio.loudness ? Math.pow(10, this.track[0].audio.loudness / 20) : 0);
 		this.bpm = (this.track[0].audio.tempo ? 120000 / this.track[0].audio.tempo : 1000) + "ms";
+		this.opacity = (this.track[0].audio.danceability ? this.track[0].audio.danceability : 0.5);
 	}
 	
 	toggleTrackAttributes() {
