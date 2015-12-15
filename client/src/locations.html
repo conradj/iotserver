@@ -1,6 +1,9 @@
 <template>
   <require from="location"></require>
-  <div class="col-sm-12 col-md-4 col-lg-3 column" repeat.for="location of locations">
-    <location location.bind='location'></location>
+  <div class="column-container">
+    <div class="col-sm-12 col-md-4 col-lg-3 column" repeat.for="location of locations">
+      <location show.bind='$index < 4' location.bind='location'></location>
+    </div>
+    <div show.bind='$index>=4' style="width:25%" location.bind='location'>Hello HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello HelloHelloHelloHelloHelloHelloHello HelloHelloHelloHello</div>
   </div>
 </template>
