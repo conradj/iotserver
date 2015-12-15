@@ -15,14 +15,11 @@ function reportChange(event) {
 gulp.task('watch', ['serve'], function() {
   gulp.watch(paths.source, ['build-system', browserSync.reload]).on('change', reportChange);
   gulp.watch(paths.html, ['build-html', browserSync.reload]).on('change', reportChange);
-  //gulp.watch(paths.css, ['build-css', browserSync.reload]).on('change', reportChange);
-  gulp.watch(paths.style, ['css']).on('change', reportChange);
-});
-
-// Compile sass into CSS & auto-inject into browsers
-gulp.task('css', function() {
+  //gulp.watch(paths.css, ['build-css']).on('change', reportChange);
+  gulp.watch(paths.style, function() {
     return gulp.src(paths.style)
-        .pipe(browserSync.stream());
+      .pipe(browserSync.stream());
+  }).on('change', reportChange);
 });
 
 // gulp.task('less', function () {
