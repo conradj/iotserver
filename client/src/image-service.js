@@ -34,7 +34,7 @@ export class ImageService {
         album.coverUrl = frontCoverUrl;
         //console.log('manageart2', album, 'cover loaded', frontCoverUrl);
         this.covers.push(frontCoverUrl);
-        this.signaler.signal('cover');
+        //this.signaler.signal('cover');
         return true;
       };
       // set the source and see if it exists
