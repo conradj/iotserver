@@ -32,15 +32,23 @@ export class Location {
     // unsubscribe
     subscription.dispose();
     
-    return this.eventService.getEventsByLocation(this.location.id).then
+    this.loadEvents(0, 10);
+  }
+  
+  loadEvents(skip, limit) {  
+    return this.eventService.getEventsByLocation(this.location.id, skip, limit).then
       (response => response.json()).then
-      (events => this.events = events.map(
+      (events => events.map(
         (event) => {
           let newEvent = new Event(event);
-          this.imageService.manageCoverArt(newEvent.track[0].album);
+          if(skip ==0) {
+            // only get covers for the first load
+            this.imageService.manageCoverArt(newEvent.track[0].album);
+          }
+          this.events.push(newEvent);
           return newEvent;           
         })
       ).then
-      (events => console.log(this.events))
+      (events => events.length == limit ? this.loadEvents(skip+limit, limit) : console.log('finished', this.location.Name))
   }
 }
