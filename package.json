@@ -112,6 +112,7 @@
       "aurelia-templating-binding": "npm:aurelia-templating-binding@^1.0.0-beta.1.0.1",
       "aurelia-templating-resources": "npm:aurelia-templating-resources@^1.0.0-beta.1.0.2",
       "aurelia-templating-router": "npm:aurelia-templating-router@^1.0.0-beta.1.0.2",
+      "aurelia-ui-virtualization": "npm:aurelia-ui-virtualization@^0.3.0",
       "bootstrap": "github:twbs/bootstrap@^3.3.4",
       "core-js": "npm:core-js@^0.9.4",
       "errorhandler": "npm:errorhandler@^1.4.2",
