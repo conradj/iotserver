@@ -246,7 +246,7 @@ div.au-stagger {
 }
 
 .event-header-container {
-  height: 50px;
+  height: 57px;
   position: relative;
   line-height: 50px;
 }
@@ -257,7 +257,7 @@ div.au-stagger {
 
 h1.location {
     font-family: 'Raleway', sans-serif;
-    color: white;
+    color: rgb(30,30,30);
     /*position: fixed;*/
     /*top: -20px;*/
     padding: 9px;
@@ -265,11 +265,12 @@ h1.location {
     animation-iteration-count: infinite; 
     opacity: 0.5;
     margin: 0px;
+    white-space: normal;
 } 
 
 .events-container {
   position: absolute;
-  top: 50px;
+  top: 57px;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -312,6 +313,12 @@ h1.location {
 .event-attributes {
   height: 0;
   padding-bottom: 100%;
+}
+
+.no-cover {
+  padding-bottom: 50%;
+  /*background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 90%);*/
+  background: rgba(0,0,0,0.4)
 }
 
 .event {

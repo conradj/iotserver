@@ -5,7 +5,7 @@
             <div class="location-header">
                 <h1 class="location" css="animation-duration: ${events[0].bpm};
                 opacity: ${events[0].opacity}; 
-                background-color: hsla(${events[0].hue}, ${events[0].saturation}, ${events[0].lightness}, ${events[0].alpha});
+                background-color: hsla(${events[0].hue}, ${events[0].saturation}, ${events[0].lightness}, 1);
                 ">
                 ${location.Name}
                 </h1>
@@ -13,12 +13,12 @@
         </div>
         <div class="events-container">
             <div class="v-scroller">
-                <div class="event-container" repeat.for="event of events">
-                    <div class="clearfix event" css="background:
+                <div repeat.for="event of events" class="event-container ${event.track[0].album.thumbnail =='' ? 'no-cover' : ''}">
+                    <div class="clearfix event ${event.track[0].album.thumbnail =='' ? 'no-cover' : ''}" css="background:
                     linear-gradient(
                         to bottom,
-                        rgba(0, 0, 0, 0.6),
-                        rgba(0, 0, 0, 0) 20%
+                        rgba(0, 0, 0, 0.4),
+                        rgba(0, 0, 0, 0.2) 20%
                         ), 
                         url(${event.track[0].album.coverUrl})" click.delegate="event.toggleTrackAttributes()">
                         <div class="media">
@@ -26,6 +26,7 @@
                                 <h4 class="media-heading">${event.track[0].Title} <small class="lastplayed">${event.CreateDate | fromNow & signal:'tick'}</small></h4>
                                 <p>${event.track[0].artist.Name}</p>
                                 <div class="event-metadata" show.bind="event.viewAttributes">
+                                    <p>Cover: '${event.track[0].album.coverUrl}'</p>
                                     <p>${event.track[0].album.Title}</p>
                                     <p>Danceability: ${event.track[0].audio.danceability}</p>
                                     <p>Energy: ${event.track[0].audio.energy}</p>
