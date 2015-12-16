@@ -1,7 +1,7 @@
 export class CoverRotateValueConverter {
   toView(covers) {
     let index = covers ? this.randomIntFromInterval(0, covers.length - 1) : 0;
-    console.log(index, covers);    
+    //console.log(index, covers);    
     return covers ? covers[index] : '';
   }
   
