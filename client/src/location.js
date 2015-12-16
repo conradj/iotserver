@@ -21,7 +21,7 @@ export class Location {
     socket.on(`event-location-${this.location.id}`, (data) => { 
       let event = new Event(data);
       console.log('scrobble', event.track[0].album);
-      this.imageService.manageCoverArt(event.track[0].album);
+      this.imageService.manageCoverArt(event.track[0].album, true);
       this.events.unshift(new Event(data));
     });
     
