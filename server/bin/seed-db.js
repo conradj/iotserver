@@ -25,11 +25,12 @@ module.exports = function seedDB(app) {
             for(var artist in shuffleArray(data.artists)) {
                 for(var album in shuffleArray(data.artists[artist].albums)) {
                     for(var track in shuffleArray(data.artists[artist].albums[album].tracks)) {
-                        scrobbles.push(Event.scrobbleAsync(createdLocations[location].id, 
-                            data.artists[artist].albums[album].title,
-                            data.artists[artist].name,
-                            data.artists[artist].albums[album].tracks[track].title)
-                        )
+                        scrobbles.push(
+                            Event.scrobbleAsync(createdLocations[location].id, 
+                                data.artists[artist].albums[album].title,
+                                data.artists[artist].name,
+                                data.artists[artist].albums[album].tracks[track].title)
+                        );
                     }      
                 }
             }
