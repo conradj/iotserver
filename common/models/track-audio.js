@@ -12,68 +12,52 @@ module.exports = function(TrackAudio) {
         );
     });
     
-    TrackAudio.findOrCreateSearch = function(artistName, trackId, trackTitle) {
-        console.log("$$$ TrackAudio.findOrCreateSearch 1");
-        return TrackAudio.findOneAsync({ where: { id: trackId } })
-        .then(function(trackAudio) {
-            console.log("$$$ trackaudio FIND");
-            TrackAudio.app.io.emit('eventmsg', {text: "trackaudiofind" });
-            if(trackAudio) {
-                console.log("$$$ trackaudio FOUND");
-                TrackAudio.app.io.emit('eventmsg', {text: "trackaudiofound" });
-                /// TODO check CheckedDate and update if it hasn't been checked for a while
-                return trackAudio;
-            } else {
-                return TrackAudio.createAttributes(artistName, trackId, trackTitle)
-            }
-            console.log("$$$ trackaudio FOUND");
-            TrackAudio.app.io.emit('eventmsg', {text: "waah" });
+    TrackAudio.getAttributes = function(artistName, trackId, trackTitle) {
+        var echoNestSearchAsync = Promise.promisify(TrackAudio.app.dataSources.echonest.search);
+        // this also gets the musicbrainz artist ID
+        return echoNestSearchAsync(artistName, trackTitle, "audio_summary", "tracks", "id:musicbrainz")
+        .then(function(json, context) {
+            return TrackAudio.parse(json[0].response);
         });
     }
     
-    TrackAudio.createAttributes = function(artistName, trackId, trackTitle) {
-        console.log("$$$ TrackAudio.createAttributes 1");
-        var echoNestSearchAsync = Promise.promisify(TrackAudio.app.dataSources.echonest.search);
-        return echoNestSearchAsync(artistName, trackTitle)
-        .then(function(json, context) {
-            var songResults,
-                audio_summary,
-                trackAudio;
-
-            trackAudio = {
-                id: trackId
+    // need to move these out
+    TrackAudio.parse = function(echonestresults) {
+        var songResults,
+            audio_summary,
+            echonest = {
+                artistmusicbrainzId: '',
+                trackAudio: {}
             };
+        
+        songResults = echonestresults.songs;
+        if(songResults && songResults.length > 0) {
+            if((songResults[0].artist_foreign_ids) && (songResults[0].artist_foreign_ids.length > 0)) {
+                // foreign_id = musicbrainz:artist:ea4dfa26-f633-4da6-a52a-f49ea4897b58
+                echonest.artistmusicbrainzId = songResults[0].artist_foreign_ids[0].foreign_id.split(':')[2];
+            }    
             
-            songResults = json[0].response.songs;
-            
-            console.log("$$$ Echonested new new");       
-            TrackAudio.app.io.emit('eventmsg', {text: "Echonested new new" });
-                //response object returned has an object called "response" *sigh*
-            if(songResults.length > 0) {
-                audio_summary = songResults[0].audio_summary;
-                trackAudio =
-                {
-                    id: trackId,
-                    key: audio_summary.key,
-                    analysisURL: audio_summary.analysis_url,
-                    energy: audio_summary.energy,
-                    liveness: audio_summary.liveness,
-                    tempo: audio_summary.tempo,
-                    speechiness: audio_summary.speechiness,
-                    acousticness: audio_summary.acousticness,
-                    instrumentalness: audio_summary.instrumentalness,
-                    mode: audio_summary.mode,
-                    time_signature: audio_summary.time_signature,
-                    duration: audio_summary.duration,
-                    loudness: audio_summary.loudness,
-                    audio_md5: audio_summary.audio_md5,
-                    valence: audio_summary.valence,
-                    danceability: audio_summary.danceability
-                }
+            audio_summary = songResults[0].audio_summary;
+            echonest.trackAudio =
+            {
+                key: audio_summary.key,
+                analysisURL: audio_summary.analysis_url,
+                energy: audio_summary.energy,
+                liveness: audio_summary.liveness,
+                tempo: audio_summary.tempo,
+                speechiness: audio_summary.speechiness,
+                acousticness: audio_summary.acousticness,
+                instrumentalness: audio_summary.instrumentalness,
+                mode: audio_summary.mode,
+                time_signature: audio_summary.time_signature,
+                duration: audio_summary.duration,
+                loudness: audio_summary.loudness,
+                audio_md5: audio_summary.audio_md5,
+                valence: audio_summary.valence,
+                danceability: audio_summary.danceability
             }
-            console.log("$$$ about to save track audio"); 
-            TrackAudio.app.io.emit('eventmsg', {text: "about to save track audio" });
-            return TrackAudio.app.models.TrackAudio.createAsync(trackAudio);
-        });
+        }
+        
+        return echonest;
     }
 };

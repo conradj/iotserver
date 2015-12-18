@@ -20,7 +20,12 @@ module.exports = function(Album) {
             cb(null, instance);  
         });
     };
-     
+    
+    Album.observe('after save', function(ctx, next) {
+        console.log('supports isNewInstance?', ctx.isNewInstance !== undefined);
+        next();
+    });
+    
     Album.remoteMethod(
         'findOrCreateOnTitleAndArtist', 
         {

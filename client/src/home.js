@@ -1,5 +1,7 @@
-//import {computedFrom} from 'aurelia-framework';
+import {inject, computedFrom, BindingEngine} from 'aurelia-framework';
 
 export class Home {
-  //heading = 'Music!';
+  constructor() {
+    
+  }
 }

@@ -1,4 +1,7 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+
 body {
+  font-family: 'Raleway', sans-serif;
   margin: 0;
 }
 
@@ -27,7 +30,7 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  top: 50px;
+  top: 0px;
   bottom: 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -38,15 +41,25 @@ body {
     position: absolute;
     left: 10px;
     right: 0;
-    top: 50px;
+    top: 15px;
     bottom: 0;
     overflow-y: inherit;
     overflow-x: inherit;
   }
 }
 
+nav-bar {
+  display: none;
+}
+
 section {
-  margin: 0 20px;
+  /*margin: 0 20px;*/
+}
+
+.column {
+  /*HACK*/
+  padding-left: 0px !important; 
+  padding-right: 0px !important;
 }
 
 .navbar-nav li.loader {
@@ -141,6 +154,19 @@ div.au-stagger {
   }
 }
 
+@keyframes barbeat {
+  0% {
+    height: 0%;
+  }
+  60% {
+    height: 90%;
+  }
+}
+
+@keyframes pulsate {
+    50% {opacity: 1.0;}
+}
+
 @keyframes fadeInRight {
   0% {
     opacity: 0;
@@ -172,4 +198,182 @@ div.au-stagger {
   100% {
     opacity: 1;
   }
+}
+
+@keyframes grow {
+  0% {
+    opacity: 0;
+    max-height: 0;
+  }
+  
+  100% {
+    opacity: 1;
+    height: auto;
+    max-height: 500px;
+  }
+}
+
+.main-container {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right:0;
+}
+
+.h-scroller {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
+  height: 100%;
+  
+}
+
+.column-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  height: 100%;
+  width: 25%;
+}
+
+@media (max-width: 800px) {
+  .column-container {
+    width: 100%;
+  }
+}
+
+.event-header-container {
+  height: 50px;
+  position: relative;
+  line-height: 50px;
+}
+
+.location-header {
+  
+}
+
+h1.location {
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    /*position: fixed;*/
+    /*top: -20px;*/
+    padding: 9px;
+    animation: pulsate ease-out;
+    animation-iteration-count: infinite; 
+    opacity: 0.5;
+    margin: 0px;
+} 
+
+.events-container {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.v-scroller {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+.column {
+  /*overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+  width: 25%;
+  display: inline-block;*/
+}
+
+.event-container {
+  /*position: relative;*/
+}
+
+.events-header {
+  /*position: fixed;*/
+  /*z-index: 100;*/
+  
+}
+
+
+.event-container,
+.event,
+.event-attributes {
+  height: 0;
+  padding-bottom: 100%;
+}
+
+.event {
+  font-family: 'Raleway', sans-serif;
+  position: absolute;
+  animation: grow 2s;
+  color: #FFF;
+  text-shadow: 0 1px 0 black;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.event:after {
+  content: "";
+  background-image: inherit;
+  background-size: 67%;
+}
+
+.media {
+  padding: 8px;
+}
+
+.event-metadata {
+  height: 0;
+  padding-bottom: 80%;
+  overflow-y: scroll;
+}
+
+.event-attributes {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  padding-bottom: 0%;
+  bottom: 0;
+  /*animation-name: barbeat;*/
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  /*transition: height ease-in-out;*/
+}
+
+.lastplayed {
+  color: rgb(200,200,200);
+}
+
+.background {
+  content: "";
+  position: fixed;
+  background-position: center; 
+  left: 0mm;
+  right: 0;
+  z-index: -1;
+  
+  display: block;
+  background-image: inherit;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(60px);
+  -o-filter: blur(60px);
+  -ms-filter: blur(60px);
+  filter: blur(10px);
+  transition: background-image 1s ease-in-out;
 }

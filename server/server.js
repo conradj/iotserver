@@ -27,7 +27,7 @@ app.start = function() {
   app.io = socketIO(server);
     
     app.io.on('connection', function(socket){
-      console.log('a user connected');
+      console.log('a user connecteds');
     });
 
 //}

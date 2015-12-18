@@ -87,9 +87,9 @@ selectNodeVersion () {
       NODE_EXE=node
     fi
     # ensure node version is set in azure environment variables
-    #echo select npm version b $NPM_JS_PATH
-    # original line NPM_CMD="\"$NODE_EXE\" \"$NPM_JS_PATH\""
-    NPM_CMD="\"$NODE_EXE\" \"$PROGRAMFILES\\npm\\3.3.9\\node_modules\\npm\\bin\\npm-cli.js\""
+    echo select npm version b $NPM_JS_PATH
+    NPM_CMD="\"$NODE_EXE\" \"$NPM_JS_PATH\""
+    #NPM_CMD="\"$NODE_EXE\" \"$PROGRAMFILES\\npm\\3.3.9\\node_modules\\npm\\bin\\npm-cli.js\""
   else
     NPM_CMD=npm
     NODE_EXE=node
@@ -115,21 +115,24 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
   echo NPM version.
   eval $NPM_CMD -v
-  echo NPM install.
-  eval $NPM_CMD install
-  exitWithMessageOnError "npm failed"
-  echo jspm install.
-  eval "node_modules/.bin/jspm install"
-  exitWithMessageOnError "jspm failed"
+  #echo NPM install.
+  #eval $NPM_CMD install
+  #exitWithMessageOnError "npm failed"
+  #echo NPM update.
+  #eval $NPM_CMD update
+  #exitWithMessageOnError "npm failed"
+  #echo jspm install.
+  #eval "node_modules/.bin/jspm install aurelia-animator-css aurelia-binding aurelia-bootstrapper aurelia-dependency-injection aurelia-framework aurelia-fetch-client aurelia-router aurelia-event-aggregator aurelia-history-browser aurelia-loader-default aurelia-loader aurelia-metadata aurelia-route-recognizer aurelia-templating-binding aurelia-templating-resources aurelia-templating-router aurelia-templating aurelia-logging aurelia-task-queue aurelia-history aurelia-path aurelia-pal aurelia-pal-browser"
+  #exitWithMessageOnError "jspm failed"
   cd - > /dev/null
 fi
 
 # 5. Run gulp transformations
 if [ -e "$DEPLOYMENT_TARGET/gulpfile.js" ]; then
   cd "$DEPLOYMENT_TARGET"
-  #echo gulp deploy.
-  #eval "./node_modules/.bin/gulp deploy"
-  #exitWithMessageOnError "gulp failed"
+  echo gulp deploy.
+  eval "./node_modules/.bin/gulp deploy"
+  exitWithMessageOnError "gulp failed"
   cd - > /dev/null
 fi
 
