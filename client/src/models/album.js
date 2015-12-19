@@ -7,7 +7,7 @@ export class Album {
 	
 	@computedFrom('coverUrl')
 	get thumbnail() {
-		console.log('coverUrl computed', this.Title, this.coverUrl)
+		//console.log('coverUrl computed', this.Title, this.coverUrl)
 		return this.coverUrl ? this.coverUrl : '';
 	}
 }

@@ -41,8 +41,8 @@ export class Location {
       (events => events.map(
         (event) => {
           let newEvent = new Event(event);
-          if(skip ==0) {
-            // only get covers for the first load
+          if(limit - skip < 25) {
+            // only get covers for the few load
             this.imageService.manageCoverArt(newEvent.track[0].album);
           }
           this.events.push(newEvent);

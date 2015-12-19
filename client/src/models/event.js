@@ -14,7 +14,5 @@ export class Event {
 		this.opacity = (this.track[0].audio.danceability ? this.track[0].audio.danceability : 0.5);
 	}
 	
-	toggleTrackAttributes() {
-    	this.viewAttributes = !this.viewAttributes;
-  	}
+	
 }

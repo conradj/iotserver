@@ -246,13 +246,18 @@ div.au-stagger {
 }
 
 .event-header-container {
-  height: 57px;
+  height: 60px;
   position: relative;
-  line-height: 50px;
+  box-shadow: 0px 4px 2px 1px rgba(20, 20, 20, 0.5);
+  z-index: 100;
 }
 
 .location-header {
   
+}
+
+.icon-header {
+  color:white;
 }
 
 h1.location {
@@ -270,7 +275,7 @@ h1.location {
 
 .events-container {
   position: absolute;
-  top: 57px;
+  top: 60px;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -339,6 +344,7 @@ h1.location {
 
 .media {
   padding: 8px;
+  white-space: normal;
 }
 
 .event-metadata {
@@ -360,7 +366,7 @@ h1.location {
 }
 
 .lastplayed {
-  color: rgb(200,200,200);
+  color: rgb(240,240,240);
 }
 
 .background {
