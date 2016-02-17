@@ -158,6 +158,14 @@ module.exports = function(Event) {
             .catch(console.error)
            
     }
+    
+    Event.scrobbleEnvironment = function(thing, 
+        cb) {
+        
+        cb(null, thing)
+    }
+        
+        
      
     Event.remoteMethod(
         'scrobble', 
@@ -171,6 +179,16 @@ module.exports = function(Event) {
               {arg: 'trackuri', type: 'string'},
             ],
           returns: {arg: 'Event', type: 'object'}
+        }
+    );
+    
+    Event.remoteMethod(
+        'scrobbleEnvironment', 
+        {
+          accepts: [
+              {arg: 'thing', type: 'string'}
+            ],
+          returns: {arg: 'thing', type: 'string'}
         }
     );
 };
