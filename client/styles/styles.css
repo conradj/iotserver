@@ -33,7 +33,7 @@ body {
   top: 0px;
   bottom: 0;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 @media print {
@@ -46,10 +46,6 @@ body {
     overflow-y: inherit;
     overflow-x: inherit;
   }
-}
-
-nav-bar {
-  display: none;
 }
 
 section {
@@ -214,13 +210,14 @@ div.au-stagger {
 }
 
 .main-container {
-  height: 100vh;
   width: 100%;
   position: absolute;
-  top: 0;
+  top: 50px;
   bottom: 0;
   left: 0;
   right:0;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .h-scroller {
@@ -239,14 +236,8 @@ div.au-stagger {
   width: 25%;
 }
 
-@media (max-width: 800px) {
-  .column-container {
-    width: 100%;
-  }
-}
-
 .event-header-container {
-  height: 60px;
+  height: 7.5vh;
   position: relative;
   box-shadow: 0px 4px 2px 1px rgba(20, 20, 20, 0.5);
   z-index: 100;
@@ -262,6 +253,7 @@ div.au-stagger {
 
 h1.location {
     font-family: 'Raleway', sans-serif;
+    font-size: 2.5vw;
     color: rgb(30,30,30);
     /*position: fixed;*/
     /*top: -20px;*/
@@ -271,11 +263,12 @@ h1.location {
     opacity: 0.5;
     margin: 0px;
     white-space: normal;
+    height: 7.5vh;
 } 
 
 .events-container {
   position: absolute;
-  top: 60px;
+  top: 7.5vh;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -304,6 +297,12 @@ h1.location {
 
 .event-container {
   /*position: relative;*/
+  overflow-y: scroll;
+  /*margin-top: 5px;
+  margin-left: 2.5px;
+  margin-right: 2.5px;*/
+  box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+  border-radius: 10px;
 }
 
 .events-header {
@@ -329,7 +328,7 @@ h1.location {
 .event {
   font-family: 'Raleway', sans-serif;
   position: absolute;
-  animation: grow 2s;
+  /*animation: grow 2s;*/
   color: #FFF;
   text-shadow: 0 1px 0 black;
   background-size: cover !important;
@@ -369,6 +368,13 @@ h1.location {
   color: rgb(240,240,240);
 }
 
+.event-cover {
+    width: 100%;
+    height: auto;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
 .background {
   content: "";
   position: fixed;
@@ -388,5 +394,24 @@ h1.location {
   -o-filter: blur(60px);
   -ms-filter: blur(60px);
   filter: blur(10px);
-  transition: background-image 1s ease-in-out;
+  transition: background-image 8s ease-in-out;
+}
+
+@media (max-width: 800px) {
+  .column-container {
+    width: 100%;
+  }
+  
+  .event-header-container {
+    height: 12vh;
+  }
+  
+  h1.location {
+      font-size: 8vw;
+      height: 12vh;
+  }
+  
+  .events-container {
+      top: 12vh;
+  }
 }
