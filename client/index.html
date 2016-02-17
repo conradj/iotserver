@@ -1,24 +1,418 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Aurelia</title>
-    <link rel="stylesheet" href="jspm_packages/npm/font-awesome@4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="styles/styles.css">
+    <title>Totter Up</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Lato:400);
+        @import url(http://static.sonos.com/v2/live/fonts/logo/sonos-logo-regular-webfont.woff2);
+        
+        html,body { 
+            height: 100%; margin: 0px; padding: 0px; 
+        }
+
+        body {
+            font-family: "Neue Helvetica W02","Helvetica Neue",Helvetica,Arial,sans-serif;
+            margin: 0;
+            background-color: rgba(21,21,21,1);
+            color: white;
+        }
+
+        h1 {
+            font-family: 'Lato';
+            font-size: 4.2em;
+            display: inline;
+        }
+
+        h2 {
+            font: 600 28px/36px "Open Sans",arial,sans-serif;
+        }
+
+        h2.primary, h6.primary, p.primary, a.primary {
+            color: #FF0043;
+        }
+
+        h2, h3, h4, h5, h6 {
+            font-family: "Neue Helvetica W02","Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            text-rendering: optimizeLegibility;
+            margin-top: 0;
+        }
+
+        .sonos {
+            color: #FFF;
+            font-family: sonos-logoregular,"Neue Helvetica W02",Helvetica,Arial,sans-serif;
+            text-transform: uppercase;
+        }
+
+        .aligner {
+            display: flex;
+        }
+
+        .aligner--center {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .aligner--list {
+            margin: 0 80px 0px 80px;
+        }
+
+        .aligner--list div {
+            margin: 0 40px 0 40px;
+            flex: 1
+        }
+
+        .aligner--list p {
+            margin-bottom: 20px;
+            text-align: center;
+            line-height: 140%
+        }
+
+        .aligner--footer {
+            padding-bottom: 60px;
+        }
+
+        .head {
+            margin-top: 5%;
+            color: white;
+        }
+
+        .strapline {
+            font: 300 24px/36px "Open Sans",arial,sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: .25rem;
+        }
+
+        .sparkle {
+            position: absolute;
+            z-index: -1;
+        }
+
+        form {
+            width: 400px;
+            background: #fff;
+            padding: 2em 4em 2em;
+            box-shadow: 0 0 1em #fff;
+            text-align: center;
+            color: rgb(60,60,60);
+        }
+
+        form h2 {
+            margin-top: 0px;
+        }
+
+        form p {
+            margin: 0px;
+        }
+
+        input {
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            outline: none;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            border: 1px solid #e2e2f1;
+            background: #efeff7;
+            padding: .8em .5em;
+            font-size: 1.6em;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            background: #fff;
+        }
+
+        .btn {
+            width: 100%;
+            margin: 20px 0 20px 0;
+            border: 1px solid #ca0035;
+            background: #FF0043;
+            font-family: Arial;
+            color: #ffffff;
+            font-size: 20px;
+            padding: 10px 20px 10px 20px;
+            text-decoration: none;
+            transition: background-color .3s ease-out;
+        }
+
+        .btn:hover {
+            background-color: #ca0035;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a {
+            transition: color .3s ease-out;
+        }
+
+        a:hover {
+            color: #ca0035;
+        }
+
+        a {
+            text-decoration: none;
+            color: #1F1C75;
+            font: 300 18px/24px "Open Sans",arial,sans-serif;
+        }
+
+        .action {
+        
+        }
+
+        .confirmation {
+            display: none;
+        }
+    </style>
   </head>
 
-  <body aurelia-app="main">
-    <div class="splash">
-      <div class="message">Totterup</div>
-      <small>Things are getting Social</small><br>
-      <i class="fa fa-spinner fa-spin"></i>
+  <body>
+    <canvas id="canvas" class="sparkle"></canvas>
+    <div id="main">
+        <div class="aligner aligner--center">
+            <div class="head">
+            <h1>Totter Up</h1>
+            <p class="strapline">Social <span class="sonos">Sonos</span>. <strong>Now In Private Beta</strong></p>
+            </div>
+        </div>
+        <div class="aligner aligner--center" style="display: none;">
+            <form>
+                <h2>Be the first to Totter Up</h2>
+                <div class="action">
+                    <input type='text' name='email' placeholder='Email Address'/>
+                    <button class='btn' onclick="go">Go</button>
+                </div>
+                <h2 class="primary confirmation">Thank you. We'll be in touch.</h2>
+                <p>We will never spam you</p>
+            </form>
+            </div>
+        <div class="aligner aligner--center">
+            <p class="strapline">Totter Up to...</p>
+        </div>
+        <div class="aligner aligner--center aligner--list">
+            <div>
+            <p>View your playing history, room by room.</p>
+            <p>Get great insights on the music you love.</p>
+            <p>Follow friends, share music recommendations.</p>
+            </div>
+            <div>
+            <p>Own your data. Download it, take it away.</p>
+            <p>Enjoy privacy and security, baked in.</p>
+            <p>Use the developer friendly APIs and extend Totter Up in ways we can't even imagine. <small>(coming soon)</small></p>
+            </div>
+        </div>
+        <div class="aligner aligner--center aligner--footer">
+            <small><a href="//twitter.com/totter_up" target="_new" class="primary">@Totter_Up</a></small>
+            <!--&nbsp;|&nbsp;<small><a class="primary" href="mailto:info@totterup.com" target="_new">info@totterup.com</a></small>-->
+        </div>
     </div>
-    
-
-    <script src="jspm_packages/system.js"></script>
-    <script src="config.js"></script>
     <script>
-      System.import('aurelia-bootstrapper');
+        window.onload = function () {
+            var frameRate = 33,
+                canvas = document.getElementById("canvas"),
+                ctx = canvas.getContext("2d"),
+                W = window.innerWidth,
+                H = document.body.scrollHeight,
+                particles = [],
+                mouse = {},
+                particle_count = 400,
+                lastX,
+                lastY,
+                lastX2,
+                lastY2,
+                active;
+
+            canvas.width = W;
+            canvas.height = H;
+
+            main.addEventListener('mousemove', track_mouse, false);
+
+            main.addEventListener('mousedown', explosion, false);
+
+            function explosion() {
+                active = 100;
+            }
+
+            for (var i = 0; i < particle_count; i++) {
+                particles.push(new particle());
+            }
+
+            function track_mouse(e) {
+                mouse.x = e.pageX + 100;
+                mouse.y = e.pageY + 100;
+                active = 1;
+
+            }
+
+            function particle() {
+                this.speed = {
+                    x: -1.25 + Math.random() * 2.5,
+                    y: -0.40 + Math.random() * 2.5
+                };
+
+                if (mouse.x && mouse.y) {
+                    this.location = {
+                        x: mouse.x + (active * (25 - Math.random() * 50)),
+                        y: mouse.y + (active * (25 - Math.random() * 50))
+                    };
+                } else {
+                    this.location = {
+                        x: W / 1.5,
+                        y: H / 4
+                    };
+                }
+
+                this.r = Math.round(Math.random() * 255) - 220;
+                this.g = Math.round(Math.random() * 255) - 220;
+                this.b = Math.round(Math.random() * 255) - 220;
+
+                this.widthHeight = 10 + Math.random() * 40;
+
+                this.life = 10 + Math.random() * 40;
+
+                this.remaining_life = this.life;
+
+                this.opacity = 1;
+            }
+
+            var f = 0;
+
+            var oldX;
+            var oldY;
+            var oldR;
+            var oldG;
+            var oldB;
+
+            function draw() {
+
+                ctx.globalCompositeOperation = "source-over";
+
+                if (mouse.x != undefined) {
+                    var lightX = mouse.x - oldX;
+                    (lightX <= 0) ? lightX = lightX * -1 : false;
+
+                    var lightY = mouse.y - oldY;
+                    (lightY <= 0) ? lightY = lightY * -1 : false;
+
+                    var finalLight = lightX + lightY;
+
+                    var r = finalLight + 21;
+                    (r <= 0) ? r = 0 : false;
+                    (r >= 21) ? r = 21 : false;
+                    (r > oldR + 1) ? r = oldR + 1 : false;
+                    (r < oldR - 1) ? r = oldR - 1 : false;
+                    oldR = r;
+
+                    var g = finalLight + 21;
+                    (g <= 0) ? g = 0 : false;
+                    (g >= 21) ? g = 21 : false;
+                    (g > oldG + 1) ? g = oldG + 1 : false;
+                    (g < oldG - 1) ? g = oldG - 1 : false;
+                    oldG = g;
+
+                    var b = finalLight + 21;
+                    (b <= 0) ? b = 0 : false;
+                    (b >= 21) ? b = 21 : false;
+                    (b > oldB + 1) ? b = oldB + 1 : false;
+                    (b < oldB - 1) ? b = oldB - 1 : false;
+                    oldB = b;
+
+                    oldX = mouse.x;
+                    oldY = mouse.y;
+
+                    ctx.fillStyle = "rgba(" + parseInt(r) + "," + parseInt(g) + "," + parseInt(b) + ",1)";
+                } else {
+                    ctx.fillStyle = "rgba(21,21,21,1)";
+                }
+
+                ctx.fillRect(0, 0, W, H);
+                ctx.globalCompositeOperation = "lighter";
+
+                if (f >= 40) {
+                    active = 25;
+                    f = 0 + (Math.random() * 50);
+                }
+                f++;
+
+                for (var i = 0; i < particles.length; i++) {
+
+                    var p = particles[i],
+                        gradient = ctx.createRadialGradient(p.location.x, p.location.y, 0, p.location.x, p.location.y, 50);
+
+                    ctx.beginPath();
+                    ctx.moveTo(p.location.x, p.location.y);
+                    ctx.lineTo(lastX, lastY);
+                    ctx.strokeStyle = "rgba(15,3,9,.6)";
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(p.location.x, p.location.y);
+                    if ((Math.random() + 0.498) > 0.5) {
+                        ctx.lineTo(lastX, lastY);
+                    } else {
+                        ctx.lineTo(lastX + (active * (75 - Math.random() * 150)), lastY + (active * (75 - Math.random() * 150)));
+                    }
+                    ctx.lineTo(lastX2, lastY2);
+
+                    var dark = 5;
+
+                    var g = p.g + 5 - dark;
+                    (g <= 0) ? g = 0 : false;
+
+                    var r = p.r + 15 - dark;
+                    (r <= 0) ? r = 0 : false;
+
+                    var b = p.b - 5 - dark;
+                    (b <= 0) ? b = 0 : false;
+
+                    var o = p.opacity - .1;
+                    (o <= 0) ? o = 0 : false;
+
+                    ctx.fillStyle = "rgba(" + r + "," + g + "," + b + "," + o + ")";
+                    ctx.stroke();
+                    ctx.fill();
+
+                    ctx.beginPath();
+                    gradient.addColorStop(0, "rgba(8,8,20,0.5)");
+                    gradient.addColorStop(0.5, "rgba(2,2,2,0.25)");
+                    gradient.addColorStop(1, "rgba(0,1,1,0)");
+                    ctx.fillStyle = gradient;
+                    ctx.arc(p.location.x, p.location.y, 50, Math.PI * 2, false);
+                    ctx.fill();
+
+                    lastX2 = lastX;
+                    lastY2 = lastY;
+                    lastX = p.location.x;
+                    lastY = p.location.y;
+
+                    p.location.x += p.speed.x;
+                    p.location.y += p.speed.y;
+
+                    p.widthHeight--;
+
+                    p.remaining_life--;
+
+                    p.opacity = ((100 * p.remaining_life) / p.life) / 100;
+
+                    frameRate++;
+
+                    if (p.opacity < 0) {
+                        particles[i] = new particle();
+                    }
+                }
+
+                active = 0;
+            }
+
+            setInterval(draw, 33);
+
+        }
     </script>
   </body>
 </html>
