@@ -1,0 +1,22 @@
+{
+  "name": "user",
+  "base": "User",
+  "plural": "users",
+  "idInjection": true,
+  "properties": {
+    "username": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "acls": [
+      {
+        "accessType": "EXECUTE",
+        "principalType": "ROLE",
+        "principalId": "admin",
+        "permission": "ALLOW",
+        "property": "find"
+        }
+  ],
+  "methods": []
+}
