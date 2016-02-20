@@ -2,7 +2,7 @@ module.exports = function mountLoopBackExplorer(server) {
   var explorer;
   console.log("explorer.js1");
   try {
-    explorer = require('loopback-explorer');
+    explorer = require('loopback-component-explorer');
     console.log("explorer.js2");
   } catch(err) {
     // Print the message only when the app was started via `server.listen()`.
