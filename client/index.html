@@ -56,7 +56,14 @@
             align-items: center;
             justify-content: center;
         }
-
+        
+        .aligner--right {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: flex-end;
+        }
+        
         .aligner--list {
             margin: 0 80px 0px 80px;
         }
@@ -69,7 +76,10 @@
         .aligner--list p {
             margin-bottom: 20px;
             text-align: center;
-            line-height: 140%
+            line-height: 140%;
+            font: 300 24px/36px "Open Sans",arial,sans-serif;
+            font-size: 1rem;
+            letter-spacing: .15rem;
         }
 
         .aligner--footer {
@@ -181,12 +191,17 @@
             <p class="strapline">Social <span class="sonos">Sonos</span>. <strong>Now In Private Beta</strong></p>
             </div>
         </div>
-        <div class="aligner aligner--center" style="display: none;">
-            <form>
+        <div class="aligner aligner--center">
+            <form action="/api/users" method="POST">
+                <!--<div>
+                    <div style="float: left;">Register</div>
+                    <div style="float: right;">Log In</div>
+                </div>-->
                 <h2>Be the first to Totter Up</h2>
                 <div class="action">
                     <input type='text' name='email' placeholder='Email Address'/>
-                    <button class='btn' onclick="go">Go</button>
+                    <input type='password' name='password' placeholder='Password'/>
+                    <button type="submit" class='btn'>Register</button>
                 </div>
                 <h2 class="primary confirmation">Thank you. We'll be in touch.</h2>
                 <p>We will never spam you</p>
@@ -197,14 +212,15 @@
         </div>
         <div class="aligner aligner--center aligner--list">
             <div>
-            <p>View your playing history, room by room.</p>
-            <p>Get great insights on the music you love.</p>
-            <p>Follow friends, share music recommendations.</p>
+                <p>View your playing history, room by room.</p>
+                <p>Get great insights on the music you love.</p>
+                <p>Follow friends, share music recommendations.</p>
             </div>
             <div>
-            <p>Own your data. Download it, take it away.</p>
-            <p>Enjoy privacy and security, baked in.</p>
-            <p>Use the developer friendly APIs and extend Totter Up in ways we can't even imagine. <small>(coming soon)</small></p>
+                <p>Connect with others and discover new music.</p>    
+                <p>Own your data. Download it, take it away.</p>
+                <p>Enjoy privacy and security, baked in.</p>
+            <!--<p>Use the developer friendly APIs and extend Totter Up in ways we can't even imagine. <small>(coming soon)</small></p>-->
             </div>
         </div>
         <div class="aligner aligner--center aligner--footer">
