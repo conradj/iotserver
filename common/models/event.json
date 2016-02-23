@@ -40,7 +40,7 @@
       }
     },
     "CreateDate": {
-      "type": "String",
+      "type": "date",
       "required": false,
       "length": null,
       "precision": null,
